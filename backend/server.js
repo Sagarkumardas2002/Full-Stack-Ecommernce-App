@@ -22,7 +22,7 @@ const app = express();
 // CORS configuration
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://fullstack-ecom-app-sagar-das.vercel.app/'
+    'https://fullstack-ecom-app-sagar-das.vercel.app'
 ];
 
 
