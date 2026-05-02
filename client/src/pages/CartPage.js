@@ -413,7 +413,6 @@
 
 // export default CartPage;
 
-
 import Layout from '../components/Layout/Layout'
 import React, { useEffect, useState } from 'react'
 import { useCart } from '../context/cart'
@@ -423,6 +422,7 @@ import DropIn from "braintree-web-drop-in-react"
 import axios from '../config/axios';    // ← fixed: shared axios with backend baseURL
 import toast from 'react-hot-toast';
 import './../StylePages/Cartpage.css';
+import { API } from '../config/api';
 
 /* ─────────────────────────────────────────────
    Skeleton card
@@ -601,7 +601,7 @@ const CartPage = () => {
                                             <div className="tv-cart__img-wrap">
                                                 <img
                                                     className="tv-cart__img"
-                                                    src={`${process.env.REACT_APP_API || ''}/api/v1/product/product-photo/${p._id}`}
+                                                    src={`${API}/api/v1/product/product-photo/${p._id}`}
                                                     alt={p.name}
                                                 />
                                             </div>

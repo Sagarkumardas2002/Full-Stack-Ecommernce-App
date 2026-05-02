@@ -334,7 +334,6 @@
 // };
 
 // export default ProductDetails;
-
 import React, { useState, useEffect, useRef } from 'react';
 import Layout from '../components/Layout/Layout';
 import axios from '../config/axios';    // ← fixed: shared axios with backend baseURL
@@ -342,6 +341,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useCart } from '../context/cart';
 import './../StylePages/Productdetails.css';
+import { API } from '../config/api';
 
 /* ─────────────────────────────────────────────────────
    Skeleton Card — shown while similar products load
@@ -373,7 +373,7 @@ const ProductCard = ({ p, onAddToCart, onDetails, delay = 0 }) => (
         <div className="pd-card__img-wrap">
             <img
                 className="pd-card__img"
-                src={`${process.env.REACT_APP_API || ''}/api/v1/product/product-photo/${p._id}`}
+                src={`${API}/api/v1/product/product-photo/${p._id}`}
                 alt={p.name}
             />
             <div className="pd-card__overlay">Quick View</div>
@@ -455,7 +455,7 @@ const Viewer3D = ({ productId, productName }) => {
                     <img
                         ref={imgRef}
                         className="pd-viewer__img"
-                        src={`${process.env.REACT_APP_API || ''}/api/v1/product/product-photo/${productId}`}
+                        src={`${API}/api/v1/product/product-photo/${productId}`}
                         alt={productName}
                         style={{ transition: 'transform 0.08s ease-out' }}
                     />

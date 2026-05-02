@@ -368,6 +368,7 @@
 
 // export default HomePage;
 
+
 import React, { useState, useEffect, useCallback } from 'react'
 import Layout from '../components/Layout/Layout'
 import axios from '../config/axios';          // ← use shared axios instance
@@ -377,6 +378,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/cart';
 import toast from 'react-hot-toast';
 import './../StylePages/HomePage.css'
+import { API } from '../config/api';
 
 const PER_PAGE = 8;
 
@@ -703,7 +705,7 @@ const HomePage = () => {
                                 <div key={p._id} className="hp-card">
                                     <div className="hp-card__img-wrap">
                                         <img
-                                            src={`/api/v1/product/product-photo/${p._id}`}
+                                            src={`${API}/api/v1/product/product-photo/${p._id}`}
                                             alt={p.name}
                                             className="hp-card__img"
                                         />

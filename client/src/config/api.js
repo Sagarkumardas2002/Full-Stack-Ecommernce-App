@@ -1,0 +1,1 @@
+export const API = 'https://full-stack-ecommernce-app-backend.onrender.com';

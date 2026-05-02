@@ -172,7 +172,6 @@
 
 // export default CategoryProduct;
 
-
 import Layout from '../components/Layout/Layout'
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
@@ -180,6 +179,7 @@ import axios from '../config/axios';    // ← fixed: shared axios with backend 
 import toast from 'react-hot-toast'
 import { useCart } from '../context/cart';
 import './../StylePages/CategoryProduct.css';
+import { API } from '../config/api';
 
 const CategoryProduct = () => {
     const params = useParams();
@@ -295,7 +295,7 @@ const CategoryProduct = () => {
                                 {/* Image */}
                                 <div className="cp-card__img-wrap">
                                     <img
-                                        src={`${process.env.REACT_APP_API || ''}/api/v1/product/product-photo/${p._id}`}
+                                        src={`${API}/api/v1/product/product-photo/${p._id}`}
                                         alt={p.name}
                                         className="cp-card__img"
                                     />

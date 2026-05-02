@@ -59,7 +59,6 @@
 // };
 
 // export default Search;
-
 import React from 'react'
 import Layout from '../components/Layout/Layout'
 import { useSearch } from '../context/ssearch'
@@ -67,6 +66,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/cart';
 import toast from 'react-hot-toast';
 import './../StylePages/Search.css';
+import { API } from '../config/api';
 
 const Search = () => {
     const [values] = useSearch();     // ← removed unused setValues
@@ -160,7 +160,7 @@ const Search = () => {
                                 {/* Image */}
                                 <div className="sr-card__img-wrap">
                                     <img
-                                        src={`${process.env.REACT_APP_API || ''}/api/v1/product/product-photo/${p._id}`}
+                                        src={`${API}/api/v1/product/product-photo/${p._id}`}
                                         alt={p.name}
                                         className="sr-card__img"
                                     />
