@@ -127,7 +127,7 @@ const Orders = () => {
 
     const getOrders = async () => {
         try {
-            const { data } = await axios.get("/api/v1/auth/orders");
+            const { data } = await axios.get("https://full-stack-ecommernce-app-backend.onrender.com/api/v1/auth/orders");
             setOrders(data);
         } catch (error) {
             console.log(error);
@@ -293,7 +293,7 @@ const Orders = () => {
                                     {o?.products?.map((p) => (
                                         <div className="or-product" key={p._id}>
                                             <img
-                                                src={`/api/v1/product/product-photo/${p._id}`}
+                                                src={`https://ecom-final-fixed-backup.onrender.com/api/v1/product/product-photo/${p._id}`}
                                                 className="or-product__img"
                                                 alt={p.name}
                                             />

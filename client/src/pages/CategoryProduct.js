@@ -23,7 +23,7 @@ const CategoryProduct = () => {
     const getProductsByCat = async () => {
         try {
             setLoading(true);
-            const { data } = await axios.get(`/api/v1/product/product-category/${params.slug}`);
+            const { data } = await axios.get(`https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/product-category/${params.slug}`);
             setProducts(data?.products);
             setCategory(data?.category);
         } catch (error) {
@@ -121,7 +121,7 @@ const CategoryProduct = () => {
                                 {/* Image */}
                                 <div className="cp-card__img-wrap">
                                     <img
-                                        src={`/api/v1/product/product-photo/${p._id}`}
+                                        src={`https://ecom-final-fixed-backup.onrender.com/api/v1/product/product-photo/${p._id}`}
                                         alt={p.name}
                                         className="cp-card__img"
                                     />

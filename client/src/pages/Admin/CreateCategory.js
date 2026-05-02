@@ -199,7 +199,7 @@ const CreateCategory = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post("/api/v1/category/create-category", { name });
+            const { data } = await axios.post("https://full-stack-ecommernce-app-backend.onrender.com/api/v1/category/create-category", { name });
             if (data?.success) {
                 toast.success(`${name} is created`);
                 getAllCategory();
@@ -215,7 +215,7 @@ const CreateCategory = () => {
 
     const getAllCategory = async () => {
         try {
-            const { data } = await axios.get('/api/v1/category/get-category');
+            const { data } = await axios.get('https://full-stack-ecommernce-app-backend.onrender.com/api/v1/category/get-category');
             if (data?.success) setCategories(data?.category);
         } catch (error) {
             console.log(error);
@@ -228,7 +228,7 @@ const CreateCategory = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.put(`/api/v1/category/update-category/${selected._id}`, { name: updatedName });
+            const { data } = await axios.put(`https://full-stack-ecommernce-app-backend.onrender.com/api/v1/category/update-category/${selected._id}`, { name: updatedName });
             if (data.success) {
                 toast.success(`${updatedName} is Updated`);
                 setSelected(null);
@@ -250,7 +250,7 @@ const CreateCategory = () => {
     const handleDelete = async () => {
         if (!deleteConfirm) return;
         try {
-            const { data } = await axios.delete(`/api/v1/category/delete-category/${deleteConfirm._id}`);
+            const { data } = await axios.delete(`https://full-stack-ecommernce-app-backend.onrender.com/api/v1/category/delete-category/${deleteConfirm._id}`);
             if (data.success) {
                 toast.success(`"${deleteConfirm.name}" deleted`);
                 getAllCategory();

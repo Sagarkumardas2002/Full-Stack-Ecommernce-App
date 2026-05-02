@@ -314,7 +314,7 @@ const Search = () => {
                                 {/* Image */}
                                 <div className="sr-card__img-wrap">
                                     <img
-                                        src={`/api/v1/product/product-photo/${p._id}`}
+                                        src={`https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/product-photo/${p._id}`}
                                         alt={p.name}
                                         className="sr-card__img"
                                     />

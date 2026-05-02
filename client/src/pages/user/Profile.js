@@ -124,7 +124,7 @@ const Profile = () => {
         e.preventDefault();
         try {
             setLoading(true);
-            const { data } = await axios.put('/api/v1/auth/profile', {
+            const { data } = await axios.put('https://full-stack-ecommernce-app-backend.onrender.com/api/v1/auth/profile', {
                 name, email, password, phone, address,
             });
             if (data?.error) {

@@ -78,7 +78,7 @@ const HomePage = () => {
 
     const getAllCategory = async () => {
         try {
-            const { data } = await axios.get("/api/v1/category/get-category");
+            const { data } = await axios.get("https://full-stack-ecommernce-app-backend.onrender.com/api/v1/category/get-category");
             if (data?.success) setCategories(data?.category || []);  // ← safe fallback
         } catch (error) {
             toast.error("Failed to load categories");
@@ -87,7 +87,7 @@ const HomePage = () => {
 
     const getTotal = async () => {
         try {
-            const { data } = await axios.get('/api/v1/product/product-count');
+            const { data } = await axios.get('https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/product-count');
             setTotal(data?.total || 0);   // ← safe fallback
         } catch (error) {
             toast.error("Failed to get product count");
@@ -97,7 +97,7 @@ const HomePage = () => {
     const getAllProducts = useCallback(async (pg = 1) => {
         try {
             setLoading(true);
-            const { data } = await axios.get(`/api/v1/product/product-list/${pg}`);
+            const { data } = await axios.get(`https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/product-list/${pg}`);
             setProducts(data?.products || []);   // ← safe fallback
         } catch (error) {
             toast.error("Failed to load products");
@@ -111,7 +111,7 @@ const HomePage = () => {
     const filterProduct = useCallback(async (pg = 1) => {
         try {
             setLoading(true);
-            const { data } = await axios.post('/api/v1/product/product-filters', {
+            const { data } = await axios.post('https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/product-filters', {
                 checked,
                 radio: radio ?? [],
                 page: pg,
@@ -333,7 +333,7 @@ const HomePage = () => {
                                 <div key={p._id} className="hp-card">
                                     <div className="hp-card__img-wrap">
                                         <img
-                                            src={`/api/v1/product/product-photo/${p._id}`}
+                                            src={`https://ecom-final-fixed-backup.onrender.com/api/v1/product/product-photo/${p._id}`}
                                             alt={p.name}
                                             className="hp-card__img"
                                         />

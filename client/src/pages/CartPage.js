@@ -97,7 +97,7 @@ const CartPage = () => {
     /* ── payment token ── */
     const getToken = async () => {
         try {
-            const { data } = await axios.get('/api/v1/product/braintree/token');
+            const { data } = await axios.get('https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/braintree/token');
             setClientToken(data?.clientToken);
         } catch (e) { console.log(e); }
     };
@@ -111,7 +111,7 @@ const CartPage = () => {
             const { nonce } = await instance.requestPaymentMethod();
 
             // Send cart as-is — backend will handle it
-            await axios.post('/api/v1/product/braintree/payment', {
+            await axios.post('https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/braintree/payment', {
                 nonce,
                 cart,  // cartQty included — backend now multiplies correctly
             });
@@ -190,7 +190,7 @@ const CartPage = () => {
                                             <div className="tv-cart__img-wrap">
                                                 <img
                                                     className="tv-cart__img"
-                                                    src={`/api/v1/product/product-photo/${p._id}`}
+                                                    src={`https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/product-photo/${p._id}`}
                                                     alt={p.name}
                                                 />
                                             </div>

@@ -66,7 +66,7 @@ const SearchInput = () => {
         try {
             setLoading(true);
             const { data } = await axios.get(
-                `/api/v1/product/search/${encodeURIComponent(trimmed)}`
+                `https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/search/${encodeURIComponent(trimmed)}`
             );
 
             if (data?.success) {

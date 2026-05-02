@@ -39,7 +39,7 @@ const ProductCard = ({ p, onAddToCart, onDetails, delay = 0 }) => (
         <div className="pd-card__img-wrap">
             <img
                 className="pd-card__img"
-                src={`/api/v1/product/product-photo/${p._id}`}
+                src={`https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/product-photo/${p._id}`}
                 alt={p.name}
             />
             <div className="pd-card__overlay">Quick View</div>
@@ -128,7 +128,7 @@ const Viewer3D = ({ productId, productName }) => {
                     <img
                         ref={imgRef}
                         className="pd-viewer__img"
-                        src={`/api/v1/product/product-photo/${productId}`}
+                        src={`https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/product-photo/${productId}`}
                         alt={productName}
                         style={{ transition: 'transform 0.08s ease-out' }}
                     />
@@ -173,7 +173,7 @@ const ProductDetails = () => {
 
     const getProduct = async () => {
         try {
-            const { data } = await axios.get(`/api/v1/product/get-product/${params.slug}`);
+            const { data } = await axios.get(`https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/get-product/${params.slug}`);
             setProduct(data?.product);
             setLoadingProduct(false);
             getSimilarProduct(data?.product._id, data?.product.category._id);
@@ -185,7 +185,7 @@ const ProductDetails = () => {
 
     const getSimilarProduct = async (pid, cid) => {
         try {
-            const { data } = await axios.get(`/api/v1/product/related-product/${pid}/${cid}`);
+            const { data } = await axios.get(`https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/related-product/${pid}/${cid}`);
             setRelatedProducts(data?.products);
         } catch (error) {
             console.log(error);
