@@ -1,0 +1,120 @@
+.tv-footer {
+  background: #0b1120;
+  border-top: 1px solid rgba(201, 168, 76, 0.2);
+  font-family: 'DM Sans', sans-serif;
+  margin-top: auto;
+}
+
+.tv-footer__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 52px 32px 40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+/* Brand */
+.tv-footer__logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.tv-footer__logo span { color: #c9a84c; }
+
+.tv-footer__tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  max-width: 260px;
+  margin-bottom: 12px;
+}
+
+.tv-footer__note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 6px 10px;
+  display: inline-block;
+}
+
+/* Columns */
+.tv-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tv-footer__heading {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  margin-bottom: 4px;
+}
+
+.tv-footer__link {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.tv-footer__link:hover { color: #c9a84c; }
+
+.tv-footer__text {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin: 0;
+}
+
+.tv-footer__author {
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+}
+
+/* Bottom Bar */
+.tv-footer__bottom {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+}
+
+.tv-footer__bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tv-footer__bottom-links a {
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.tv-footer__bottom-links a:hover { color: #c9a84c; }
+.tv-footer__bottom-links span { color: rgba(255,255,255,0.15); }
+
+@media (max-width: 768px) {
+  .tv-footer__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 40px 20px 32px;
+  }
+  .tv-footer__brand { grid-column: 1 / -1; }
+  .tv-footer__bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    padding: 16px 20px;
+  }
+}

@@ -1,0 +1,68 @@
+/* ─── User Menu ─────────────────────────────────── */
+.um-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.um-title {
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--pf-gold);
+  margin-bottom: 4px;
+  padding-left: 2px;
+}
+.um-card {
+  background: var(--pf-white);
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius);
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: all var(--pf-transition);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+.um-card:hover {
+  border-color: rgba(201, 168, 76, 0.45);
+  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.12);
+  transform: translateY(-1px);
+}
+.um-card.active {
+  background: var(--pf-navy);
+  border-color: var(--pf-gold-border);
+}
+.um-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--pf-gold-dim);
+  border: 1px solid var(--pf-gold-border);
+  color: var(--pf-gold);
+}
+.um-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--pf-text-1);
+  line-height: 1.2;
+}
+.um-card.active .um-label { color: #fff; }
+.um-sub {
+  font-size: 11.5px;
+  color: var(--pf-text-3);
+  margin-top: 2px;
+}
+.um-card.active .um-sub { color: rgba(255, 255, 255, 0.45); }
+.um-arrow {
+  margin-left: auto;
+  color: var(--pf-border-dk);
+  flex-shrink: 0;
+  transition: color var(--pf-transition);
+}
+.um-card:hover .um-arrow,
+.um-card.active .um-arrow { color: var(--pf-gold); }

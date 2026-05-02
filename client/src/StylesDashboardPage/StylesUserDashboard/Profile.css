@@ -1,0 +1,494 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=DM+Sans:wght@300;400;500&display=swap");
+
+/* ─── Variables ─────────────────────────────────── */
+:root {
+  --pf-navy: #0b1120;
+  --pf-gold: #c9a84c;
+  --pf-gold-dim: rgba(201, 168, 76, 0.1);
+  --pf-gold-border: rgba(201, 168, 76, 0.25);
+  --pf-bg: #f5f3ef;
+  --pf-white: #ffffff;
+  --pf-surface: #faf9f6;
+  --pf-border: #e8e5df;
+  --pf-border-dk: #d4cfc6;
+  --pf-text-1: #0b1120;
+  --pf-text-2: #6b7280;
+  --pf-text-3: #94a3b8;
+  --pf-radius: 12px;
+  --pf-transition: 0.2s ease;
+}
+
+/* ─── Page ──────────────────────────────────────── */
+.pf-page {
+  background: var(--pf-bg);
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+}
+
+/* ─── Hero ──────────────────────────────────────── */
+.pf-hero {
+  background: var(--pf-navy);
+  padding: 40px 48px 36px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pf-hero::before {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  border: 50px solid rgba(201, 168, 76, 0.06);
+  pointer-events: none;
+}
+.pf-hero::after {
+  content: "";
+  position: absolute;
+  right: 110px;
+  bottom: -70px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  border: 38px solid rgba(201, 168, 76, 0.04);
+  pointer-events: none;
+}
+.pf-hero__content {
+  position: relative;
+  z-index: 1;
+}
+.pf-hero__tag {
+  display: inline-block;
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--pf-gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.pf-hero__title {
+  font-family: "Playfair Display", serif;
+  font-size: 34px;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.pf-hero__title em {
+  color: var(--pf-gold);
+  font-style: normal;
+}
+.pf-hero__sub {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.pf-hero__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.15);
+  border: 2px solid rgba(201, 168, 76, 0.35);
+  color: var(--pf-gold);
+  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Body Layout ───────────────────────────────── */
+.pf-body {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 28px;
+  padding: 32px 48px 60px 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ─── Sidebar ───────────────────────────────────── */
+.pf-sidebar {
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+}
+
+/* ─── Main ──────────────────────────────────────── */
+.pf-main {
+  min-width: 0;
+}
+
+/* ─── Profile Card ──────────────────────────────── */
+.pf-card {
+  background: var(--pf-white);
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius);
+  padding: 28px 32px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  animation: pfFadeUp 0.35s ease both;
+}
+@keyframes pfFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pf-card__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.pf-card__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--pf-navy);
+  color: var(--pf-gold);
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid var(--pf-gold-border);
+}
+.pf-card__role {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pf-gold);
+  margin-bottom: 2px;
+}
+.pf-card__name {
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  color: var(--pf-text-1);
+  font-weight: 600;
+}
+.pf-card__divider {
+  height: 1px;
+  background: var(--pf-border);
+  margin: 20px 0;
+}
+
+/* ─── Form ──────────────────────────────────────── */
+.pf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pf-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ─── Field ─────────────────────────────────────── */
+.pf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pf-field--full {
+  grid-column: 1 / -1;
+}
+.pf-field__label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--pf-text-2);
+}
+.pf-field__icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: var(--pf-gold-dim);
+  border: 1px solid var(--pf-gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pf-gold);
+  flex-shrink: 0;
+}
+.pf-field__badge {
+  margin-left: auto;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  font-size: 9.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.pf-field__badge--opt {
+  background: var(--pf-gold-dim);
+  border-color: var(--pf-gold-border);
+  color: var(--pf-gold);
+}
+
+/* ─── Input ─────────────────────────────────────── */
+.pf-input {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--pf-surface);
+  border: 1.5px solid var(--pf-border);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--pf-text-1);
+  font-family: "DM Sans", sans-serif;
+  outline: none;
+  transition:
+    border-color var(--pf-transition),
+    box-shadow var(--pf-transition),
+    background var(--pf-transition);
+  -moz-appearance: textfield;
+}
+.pf-input::-webkit-outer-spin-button,
+.pf-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.pf-input::placeholder {
+  color: var(--pf-text-3);
+}
+.pf-input:focus {
+  border-color: var(--pf-gold);
+  background: var(--pf-white);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+}
+.pf-input--disabled {
+  background: #f1f0ec;
+  color: var(--pf-text-3);
+  cursor: not-allowed;
+  border-color: var(--pf-border);
+}
+.pf-input--disabled:focus {
+  border-color: var(--pf-border);
+  box-shadow: none;
+}
+
+/* ─── Form Footer ───────────────────────────────── */
+.pf-form__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.pf-form__hint {
+  font-size: 12px;
+  color: var(--pf-text-3);
+  font-style: italic;
+}
+
+/* ─── Submit Button ─────────────────────────────── */
+.pf-submit-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--pf-navy);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 28px;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: "DM Sans", sans-serif;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all var(--pf-transition);
+}
+.pf-submit-btn:hover:not(:disabled) {
+  background: var(--pf-gold);
+  color: var(--pf-navy);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(201, 168, 76, 0.28);
+}
+.pf-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── Spinner ───────────────────────────────────── */
+@keyframes pfSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.pf-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: pfSpin 0.7s linear infinite;
+}
+.pf-submit-btn:hover .pf-spinner {
+  border-color: rgba(11, 17, 32, 0.2);
+  border-top-color: var(--pf-navy);
+}
+
+/* ─── Sidebar Nav Cards ─────────────────────────── */
+.um-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.um-title {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--pf-gold);
+  margin-bottom: 6px;
+  padding-left: 2px;
+}
+.um-card {
+  background: var(--pf-white);
+  border: 1px solid var(--pf-border);
+  border-radius: var(--pf-radius);
+  padding: 20px 22px;
+  cursor: pointer;
+  transition: all var(--pf-transition);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+.um-card:hover {
+  border-color: rgba(201, 168, 76, 0.45);
+  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.12);
+  transform: translateY(-1px);
+}
+.um-card--active {
+  background: var(--pf-navy);
+  border-color: var(--pf-gold-border);
+}
+.um-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--pf-gold-dim);
+  border: 1px solid var(--pf-gold-border);
+  color: var(--pf-gold);
+}
+.um-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--pf-text-1);
+  line-height: 1.2;
+}
+.um-card--active .um-label {
+  color: #fff;
+}
+.um-sub {
+  font-size: 12.5px;
+  color: var(--pf-text-3);
+  margin-top: 3px;
+}
+.um-card--active .um-sub {
+  color: rgba(255, 255, 255, 0.45);
+}
+.um-arrow {
+  margin-left: auto;
+  color: var(--pf-border-dk);
+  flex-shrink: 0;
+  transition: color var(--pf-transition);
+}
+.um-card:hover .um-arrow,
+.um-card--active .um-arrow {
+  color: var(--pf-gold);
+}
+
+/* ─── Responsive ────────────────────────────────── */
+@media (max-width: 900px) {
+  .pf-body {
+    grid-template-columns: 1fr;
+    padding: 20px 16px 48px;
+  }
+  .pf-sidebar {
+    position: static;
+  }
+  .pf-hero {
+    padding: 32px 24px 28px;
+  }
+  .pf-hero__avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 640px) {
+  .pf-form__row {
+    grid-template-columns: 1fr;
+  }
+  .pf-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 28px 20px;
+  }
+  .pf-hero__avatar {
+    display: none;
+  }
+  .pf-hero__title {
+    font-size: 26px;
+  }
+  .pf-card {
+    padding: 20px 16px;
+  }
+  .pf-form__footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pf-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pf-hero {
+    padding: 24px 16px;
+  }
+  .pf-hero__title {
+    font-size: 22px;
+  }
+  .pf-body {
+    padding: 16px 12px 40px;
+  }
+  .pf-card {
+    padding: 16px 14px;
+  }
+}

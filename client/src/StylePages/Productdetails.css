@@ -1,0 +1,728 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=DM+Sans:wght@300;400;500&display=swap");
+
+/* ─── Variables (mirrors homepage) ──────────────── */
+:root {
+  --navy: #0b1120;
+  --navy-2: #111827;
+  --navy-3: #1a2438;
+  --gold: #c9a84c;
+  --gold-light: rgba(201, 168, 76, 0.12);
+  --gold-border: rgba(201, 168, 76, 0.3);
+
+  --page-bg: #f5f3ef;
+  --card-bg: #ffffff;
+  --card-border: #e8e5df;
+  --card-inner: #f1f0ec;
+  --sidebar-bg: #ffffff;
+
+  --text-dark: #0b1120;
+  --text-body: #0f172a;
+  --text-mid: #475569;
+  --text-muted: #94a3b8;
+
+  --radius: 12px;
+  --radius-sm: 6px;
+  --radius-btn: 6px;
+
+  --shadow-card: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.1);
+  --shadow-3d: 0 20px 60px rgba(0, 0, 0, 0.14), 0 8px 20px rgba(0, 0, 0, 0.08);
+
+  --transition: 0.2s ease;
+
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "DM Sans", sans-serif;
+}
+
+/* ─── Base ───────────────────────────────────────── */
+.pd-page * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.pd-page {
+  font-family: var(--font-sans);
+  background: var(--page-bg);
+  min-height: 100vh;
+  color: var(--text-body);
+}
+
+/* ─── Breadcrumb bar ─────────────────────────────── */
+.pd-hero {
+  background: var(--navy);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  padding: 13px 32px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pd-hero__crumb {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+.pd-hero__crumb:hover {
+  color: var(--gold);
+}
+
+.pd-hero__sep {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 11px;
+}
+
+.pd-hero__current {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+/* ─── Main 2-col Layout ──────────────────────────── */
+.pd-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 44px 28px 64px;
+}
+
+@media (max-width: 820px) {
+  .pd-main {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* ─── 3-D Viewer ─────────────────────────────────── */
+.pd-viewer {
+  perspective: 1100px;
+}
+
+.pd-viewer__stage {
+  position: relative;
+  border-radius: var(--radius);
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-3d);
+  overflow: hidden;
+  aspect-ratio: 1;
+  transform-style: preserve-3d;
+  transition: box-shadow 0.25s ease;
+  cursor: crosshair;
+  will-change: transform;
+  user-select: none;
+}
+
+.pd-viewer__stage:hover {
+  box-shadow:
+    0 32px 90px rgba(0, 0, 0, 0.16),
+    0 12px 30px rgba(0, 0, 0, 0.09);
+}
+
+/* inside tint to match card-inner separator vibe */
+.pd-viewer__stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(201, 168, 76, 0.04) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pd-viewer__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 40px;
+  display: block;
+  pointer-events: none;
+  will-change: transform;
+  mix-blend-mode: multiply;
+  position: relative;
+  z-index: 0;
+}
+
+/* glossy shine layer */
+.pd-viewer__shine {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 2;
+}
+.pd-viewer__stage:hover .pd-viewer__shine {
+  opacity: 1;
+}
+
+.pd-viewer__edge {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.03);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.pd-viewer__hint {
+  text-align: center;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.pd-viewer__hint-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.4);
+}
+
+/* ─── Info Panel ─────────────────────────────────── */
+.pd-info {
+  display: flex;
+  flex-direction: column;
+  padding-top: 4px;
+}
+
+/* "PRODUCT" badge — exact match to hp-card__category */
+.pd-info__badge {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  margin-bottom: 10px;
+}
+
+.pd-info__name {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 2.8vw, 32px);
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.pd-info__price {
+  font-family: var(--font-sans);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 22px;
+}
+
+.pd-info__divider {
+  border: none;
+  border-top: 1px solid var(--card-inner);
+  margin: 18px 0;
+}
+
+/* key → value rows */
+.pd-info__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.pd-info__row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.pd-info__row-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-body);
+  width: 88px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.pd-info__row-value {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+.pd-info__category-chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--gold-light);
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-body);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* CTA buttons */
+.pd-info__cta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Primary — gold, matches hp-btn--gold */
+.pd-btn-primary {
+  flex: 1;
+  background: var(--gold);
+  border: none;
+  color: var(--navy);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    transform var(--transition);
+  min-width: 140px;
+}
+.pd-btn-primary:hover {
+  background: #d4b355;
+  transform: translateY(-1px);
+}
+.pd-btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Secondary — ghost, matches hp-btn--ghost */
+.pd-btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(11, 17, 32, 0.2);
+  color: var(--text-mid);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition:
+    border-color var(--transition),
+    color var(--transition);
+}
+.pd-btn-secondary:hover {
+  border-color: rgba(11, 17, 32, 0.4);
+  color: var(--text-dark);
+}
+
+/* trust badges */
+.pd-trust {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--card-inner);
+}
+
+.pd-trust__item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-body);
+}
+
+.pd-trust__icon {
+  width: 30px;
+  height: 30px;
+  background: var(--gold-light);
+  border: 1px solid var(--gold-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* ─── Divider ────────────────────────────────────── */
+.pd-divider {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 28px;
+  border: none;
+  border-top: 1px solid var(--card-border);
+}
+
+/* ─── Similar Products section ───────────────────── */
+.pd-similar {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 48px 28px 80px;
+}
+
+.pd-similar__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* "YOU MAY ALSO LIKE" micro-label */
+.pd-similar__label {
+  display: inline-block;
+  background: var(--gold-light);
+  border: 1px solid var(--gold-border);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  margin-bottom: 14px;
+}
+
+.pd-similar__title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.pd-similar__empty {
+  text-align: center;
+  padding: 56px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-muted);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+}
+
+/* ─── Grid ───────────────────────────────────────── */
+.pd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* ─── Card — exact hp-card pattern ──────────────── */
+.pd-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  animation: cardIn 0.34s ease both;
+}
+
+.pd-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* image area — white bg, light inner border, exactly like hp-card__img-wrap */
+.pd-card__img-wrap {
+  position: relative;
+  background: #ffffff;
+  height: 180px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-bottom: 1px solid var(--card-inner);
+}
+
+.pd-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+  mix-blend-mode: multiply;
+}
+
+.pd-card:hover .pd-card__img {
+  transform: scale(1.04);
+}
+
+/* quick-view btn — matches hp-card__quick */
+.pd-card__overlay {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(11, 17, 32, 0.9);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-btn);
+  padding: 8px 18px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: bottom 0.25s ease;
+}
+.pd-card:hover .pd-card__overlay {
+  bottom: 12px;
+}
+
+/* card body */
+.pd-card__body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* "PRODUCT" — matches hp-card__category */
+.pd-card__badge {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+/* matches hp-card__name */
+.pd-card__name {
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-body);
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+
+/* matches hp-card__desc */
+.pd-card__desc {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-body);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+/* footer with top border — matches hp-card__footer */
+.pd-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--card-inner);
+  margin-top: auto;
+}
+
+/* price — Playfair, matches hp-card__price */
+.pd-card__price {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.pd-card__btns {
+  display: flex;
+  gap: 6px;
+}
+
+/* Details btn — matches hp-card__btn--detail */
+.pd-card__btn-details {
+  background: var(--card-inner);
+  border: none;
+  color: var(--text-mid);
+  padding: 7px 12px;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.pd-card__btn-details:hover {
+  background: #e2e8f0;
+}
+
+/* + Cart btn — matches hp-card__btn--cart */
+.pd-card__btn-cart {
+  background: var(--navy);
+  border: none;
+  color: #fff;
+  padding: 7px 12px;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.pd-card__btn-cart:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+/* ─── Skeleton — matches .skel pattern from homepage ── */
+@keyframes skel-shimmer {
+  0% {
+    background-position: -600px 0;
+  }
+  100% {
+    background-position: 600px 0;
+  }
+}
+
+.pd-skel-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  pointer-events: none;
+}
+
+.pd-skel-card__img {
+  height: 180px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 600px 100%;
+  animation: skel-shimmer 1.4s infinite linear;
+}
+
+.pd-skel-card__body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.pd-skel-line {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 600px 100%;
+  animation: skel-shimmer 1.4s infinite linear;
+}
+
+.pd-skel-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--card-inner);
+  gap: 8px;
+}
+
+.pd-skel-btn {
+  height: 30px;
+  border-radius: var(--radius-btn);
+  background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+  background-size: 600px 100%;
+  animation: skel-shimmer 1.4s infinite linear;
+}
+
+/* stagger wave like homepage */
+.pd-grid .pd-skel-card:nth-child(1) * {
+  animation-delay: 0s;
+}
+.pd-grid .pd-skel-card:nth-child(2) * {
+  animation-delay: 0.08s;
+}
+.pd-grid .pd-skel-card:nth-child(3) * {
+  animation-delay: 0.16s;
+}
+.pd-grid .pd-skel-card:nth-child(4) * {
+  animation-delay: 0.24s;
+}
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 640px) {
+  .pd-card__img-wrap {
+    height: 140px;
+    padding: 8px;
+  }
+  .pd-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .pd-card__desc {
+    display: none;
+  }
+  .pd-card__btn-details {
+    display: none;
+  }
+  .pd-card__btn-cart {
+    width: 100%;
+  }
+  .pd-card__btns {
+    width: 100%;
+  }
+  .pd-card__footer {
+    flex-wrap: wrap;
+  }
+  .pd-similar {
+    padding: 32px 16px 60px;
+  }
+  .pd-main {
+    padding: 24px 16px 40px;
+  }
+}
