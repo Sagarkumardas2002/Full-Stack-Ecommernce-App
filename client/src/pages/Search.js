@@ -60,8 +60,6 @@
 
 // export default Search;
 
-
-
 import React from 'react'
 import Layout from '../components/Layout/Layout'
 import { useSearch } from '../context/ssearch'
@@ -71,14 +69,14 @@ import toast from 'react-hot-toast';
 import './../StylePages/Search.css';
 
 const Search = () => {
-    const [values, setValues] = useSearch();
+    const [values] = useSearch();     // ← removed unused setValues
     const navigate = useNavigate();
     const [cart, setCart] = useCart();
 
     const resultCount = values?.results?.length ?? 0;
 
     const handleAddToCart = (p) => {
-        const updatedCart = [...cart, p];
+        const updatedCart = [...cart, { ...p, cartQty: 1 }];   // ← added cartQty
         setCart(updatedCart);
         localStorage.setItem('cart', JSON.stringify(updatedCart));
         toast.success('Added to cart');
@@ -153,7 +151,7 @@ const Search = () => {
                 {/* ── Product Grid ── */}
                 {resultCount > 0 && (
                     <div className="sr-grid">
-                        {values.results.map((p, i) => (
+                        {(values?.results || []).map((p, i) => (
                             <div
                                 key={p._id}
                                 className="sr-card"
@@ -162,7 +160,7 @@ const Search = () => {
                                 {/* Image */}
                                 <div className="sr-card__img-wrap">
                                     <img
-                                        src={`/api/v1/product/product-photo/${p._id}`}
+                                        src={`${process.env.REACT_APP_API || ''}/api/v1/product/product-photo/${p._id}`}
                                         alt={p.name}
                                         className="sr-card__img"
                                     />
