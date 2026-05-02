@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=DM+Sans:wght@300;400;500&display=swap");
 
-/* ─── Variables (shared with Profile) ───────────── */
+/* ─── Variables ───────────────────────────────── */
 :root {
   --pf-navy: #0b1120;
   --pf-gold: #c9a84c;
@@ -198,33 +198,19 @@
   background: var(--pf-white);
   border: 1px solid var(--pf-border);
   border-radius: var(--pf-radius);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.66);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   margin-bottom: 20px;
   overflow: hidden;
   animation: orFadeUp 0.35s ease both;
 }
-.or-card:nth-child(2) {
-  animation-delay: 0.05s;
-}
-.or-card:nth-child(3) {
-  animation-delay: 0.1s;
-}
-.or-card:nth-child(4) {
-  animation-delay: 0.15s;
-}
-.or-card:nth-child(5) {
-  animation-delay: 0.2s;
-}
+.or-card:nth-child(2) { animation-delay: 0.05s; }
+.or-card:nth-child(3) { animation-delay: 0.1s; }
+.or-card:nth-child(4) { animation-delay: 0.15s; }
+.or-card:nth-child(5) { animation-delay: 0.2s; }
 
 @keyframes orFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ─── Order Meta Bar ────────────────────────────── */
@@ -286,45 +272,35 @@
   color: var(--pf-gold);
   border: 1px solid rgba(201, 168, 76, 0.3);
 }
-.or-status--processing::before {
-  background: var(--pf-gold);
-}
+.or-status--processing::before { background: var(--pf-gold); }
 
 .or-status--shipped {
   background: rgba(59, 130, 246, 0.12);
   color: #60a5fa;
   border: 1px solid rgba(59, 130, 246, 0.25);
 }
-.or-status--shipped::before {
-  background: #60a5fa;
-}
+.or-status--shipped::before { background: #60a5fa; }
 
 .or-status--delivered {
   background: rgba(34, 197, 94, 0.12);
   color: #4ade80;
   border: 1px solid rgba(34, 197, 94, 0.25);
 }
-.or-status--delivered::before {
-  background: #4ade80;
-}
+.or-status--delivered::before { background: #4ade80; }
 
 .or-status--cancelled {
   background: rgba(239, 68, 68, 0.1);
   color: #f87171;
   border: 1px solid rgba(239, 68, 68, 0.2);
 }
-.or-status--cancelled::before {
-  background: #f87171;
-}
+.or-status--cancelled::before { background: #f87171; }
 
 .or-status--default {
   background: rgba(148, 163, 184, 0.12);
   color: var(--pf-text-3);
   border: 1px solid rgba(148, 163, 184, 0.2);
 }
-.or-status--default::before {
-  background: var(--pf-text-3);
-}
+.or-status--default::before { background: var(--pf-text-3); }
 
 /* Payment pill */
 .or-payment {
@@ -379,9 +355,7 @@
   flex-shrink: 0;
   transition: transform var(--pf-transition);
 }
-.or-product:hover .or-product__img {
-  transform: scale(1.04);
-}
+.or-product:hover .or-product__img { transform: scale(1.04); }
 .or-product__info {
   flex: 1;
   min-width: 0;
@@ -418,7 +392,7 @@
   white-space: nowrap;
 }
 
-/* ─── Sidebar Nav Cards (shared) ───────────────── */
+/* ─── Sidebar Nav Cards ─────────────────────────── */
 .um-wrap {
   display: flex;
   flex-direction: column;
@@ -443,6 +417,7 @@
   align-items: center;
   gap: 16px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  text-decoration: none;
 }
 .um-card:hover {
   border-color: rgba(201, 168, 76, 0.45);
@@ -471,17 +446,13 @@
   color: var(--pf-text-1);
   line-height: 1.2;
 }
-.um-card--active .um-label {
-  color: #fff;
-}
+.um-card--active .um-label { color: #fff; }
 .um-sub {
   font-size: 12.5px;
   color: var(--pf-text-3);
   margin-top: 3px;
 }
-.um-card--active .um-sub {
-  color: rgba(255, 255, 255, 0.45);
-}
+.um-card--active .um-sub { color: rgba(255, 255, 255, 0.45); }
 .um-arrow {
   margin-left: auto;
   color: var(--pf-border-dk);
@@ -489,148 +460,213 @@
   transition: color var(--pf-transition);
 }
 .um-card:hover .um-arrow,
-.um-card--active .um-arrow {
-  color: var(--pf-gold);
-}
+.um-card--active .um-arrow { color: var(--pf-gold); }
 
-/* ─── Responsive ────────────────────────────────── */ /* ─── Responsive — fix mobile layout ───────────── */
+/* ════════════════════════════════════════════════
+   RESPONSIVE — TABLET (max 900px)
+════════════════════════════════════════════════ */
 @media (max-width: 900px) {
   .or-body {
     grid-template-columns: 1fr;
     padding: 20px 16px 48px;
     gap: 16px;
   }
-  .or-sidebar {
-    position: static;
-  }
-  .or-hero {
-    padding: 32px 24px 28px;
-  }
+  .or-sidebar { position: static; }
+  .or-hero { padding: 32px 24px 28px; }
   .or-meta__item {
     padding-right: 16px;
     margin-right: 16px;
   }
 }
 
+/* ════════════════════════════════════════════════
+   RESPONSIVE — MOBILE (max 640px)
+   Complete redesign for small screens
+════════════════════════════════════════════════ */
 @media (max-width: 640px) {
+
+  /* ── Page body ── */
   .or-body {
-    padding: 16px 0 40px; /* remove side padding so card goes edge-to-edge */
+    padding: 16px 12px 48px;
     gap: 14px;
   }
 
-  /* Sidebar — shrink to compact horizontal strip on mobile */
-  .or-sidebar {
-    padding: 0 12px;
-  }
-  .um-wrap {
-    gap: 8px;
-  }
-  .um-title {
-    font-size: 16px;
-    margin-bottom: 2px;
-  }
-  .um-card {
-    padding: 13px 16px;
+  /* ── Hero ── */
+  .or-hero {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 20px;
     gap: 12px;
+  }
+  .or-hero__tag { margin-bottom: 8px; }
+  .or-hero__title { font-size: 26px; margin-bottom: 4px; }
+  .or-hero__sub { font-size: 12px; }
+
+  /* Show compact badge on mobile */
+  .or-hero__badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 16px;
+    flex-shrink: 0;
+  }
+  .or-hero__badge-num { font-size: 26px; }
+  .or-hero__badge-label { font-size: 10px; }
+
+  /* ── Sidebar — compact horizontal pills ── */
+  .um-title {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .um-wrap { gap: 8px; }
+  .um-card {
+    padding: 12px 14px;
+    gap: 12px;
+    border-radius: 10px;
   }
   .um-icon {
     width: 36px;
     height: 36px;
+    border-radius: 8px;
   }
-  .um-label {
-    font-size: 13.5px;
-  }
-  .um-sub {
-    font-size: 11px;
-  }
+  .um-label { font-size: 13.5px; }
+  .um-sub { font-size: 11.5px; }
 
-  /* Hero */
-  .or-hero {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 28px 20px;
-  }
-  .or-hero__badge {
-    display: none;
-  }
-  .or-hero__title {
-    font-size: 30px;
-  }
+  /* ── Section header ── */
+  .or-section-header { margin-bottom: 14px; }
+  .or-section-title { font-size: 18px; }
 
-  /* Section header */
-  .or-section-header {
-    padding: 0 12px;
-  }
-
-  /* Order card — full width, no side margin */
+  /* ── Order card ── */
   .or-card {
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    margin-bottom: 12px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
-  /* Meta bar — stack vertically but as a 2-col grid */
+  /* ── Meta bar — clean 2-col grid ── */
   .or-meta {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px 12px;
-    padding: 16px;
-  }
-  .or-meta__item {
-    border-right: none;
-    border-bottom: none;
+    gap: 0;
     padding: 0;
-    margin: 0;
   }
+
+  /* Every cell gets equal padding + a subtle divider */
+  .or-meta__item {
+    padding: 14px 16px;
+    margin: 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    gap: 5px;
+  }
+
+  /* Right column cells get a left border to form a grid */
+  .or-meta__item:nth-child(even) {
+    border-left: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  /* Last row: remove bottom border */
+  .or-meta__item:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  /* Remove the desktop "push to right" on last item */
   .or-meta__item:last-child {
     margin-left: 0;
   }
 
-  /* Products */
-  .or-products {
-    padding: 14px 12px;
+  .or-meta__label {
+    font-size: 9.5px;
+    letter-spacing: 0.07em;
+    color: rgba(255, 255, 255, 0.38);
   }
+  .or-meta__value { font-size: 12.5px; }
+
+  /* Pills stay compact, don't stretch */
+  .or-status,
+  .or-payment {
+    font-size: 11px;
+    padding: 4px 10px;
+    align-self: flex-start;
+    width: fit-content;
+  }
+
+  /* ── Products ── */
+  .or-products {
+    padding: 12px;
+    gap: 10px;
+  }
+
   .or-product {
-    flex-direction: row; /* keep image left, text right on mobile */
-    align-items: flex-start;
     gap: 12px;
     padding: 12px;
+    border-radius: 8px;
+    align-items: flex-start;
   }
+
   .or-product__img {
-    width: 72px;
-    height: 72px;
+    width: 68px;
+    height: 68px;
+    border-radius: 7px;
     flex-shrink: 0;
   }
-  .or-product__name {
-    font-size: 13.5px;
+
+  /* Info + price stack vertically */
+  .or-product__info {
+    flex: 1;
+    min-width: 0;
   }
+
+  .or-product__name {
+    font-size: 13px;
+    margin-bottom: 3px;
+    white-space: normal;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   .or-product__desc {
     font-size: 11.5px;
+    margin-bottom: 6px;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
+
+  .or-product__qty {
+    font-size: 11px;
+    padding: 2px 7px;
+  }
+
+  /* Price sits below info, right-aligned */
   .or-product__price {
-    font-size: 16px;
+    font-size: 15px;
     align-self: flex-end;
+    flex-shrink: 0;
   }
 }
 
-@media (max-width: 480px) {
-  .or-hero {
-    padding: 22px 16px;
-  }
-  .or-hero__title {
-    font-size: 26px;
-  }
-  .or-meta {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px 8px;
-    padding: 14px 12px;
-  }
-  .or-meta__label {
-    font-size: 9px;
-  }
-  .or-meta__value {
-    font-size: 12.5px;
-  }
+/* ════════════════════════════════════════════════
+   RESPONSIVE — SMALL MOBILE (max 400px)
+════════════════════════════════════════════════ */
+@media (max-width: 400px) {
+  .or-hero { padding: 20px 14px; }
+  .or-hero__title { font-size: 22px; }
+  .or-hero__badge { display: none; }
+
+  .or-body { padding: 12px 8px 40px; }
+
+  .or-meta__item { padding: 12px 12px; }
+  .or-meta__label { font-size: 9px; }
+  .or-meta__value { font-size: 12px; }
+
+  .or-product__img { width: 60px; height: 60px; }
+  .or-product__name { font-size: 12.5px; }
+  .or-product__price { font-size: 14px; }
 }

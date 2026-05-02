@@ -522,26 +522,52 @@
 }
 
 @media (max-width: 640px) {
-  .hp-card__img-wrap {
-    height: 130px;
-    padding: 8px;
+  .hp-hero::before {
+    width: 200px;
+    height: 200px;
+    right: -40px;
+    top: -40px;
+  }
+   .hp-hero::after {
+    width: 150px;
+    height: 150px;
+    right: 60px;
+    bottom: -60px;
+  }
+   .hp-card__desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .hp-grid {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
   .hp-card__body {
-    padding: 10px;
+   display: flex;
+    flex-direction: column;
+    flex: 1;
+  }  
+  .hp-card {
+    display: flex;
+    flex-direction: column;
   }
   .hp-card__name {
     font-size: 13px;
   }
   .hp-card__price {
     font-size: 15px;
+    margin-left: 15px;
   }
   .hp-card__btn {
     padding: 6px 8px;
     font-size: 10.5px;
+  }
+    .hp-card__footer {
+    margin-top: auto;
   }
 }
 
@@ -573,18 +599,42 @@
   }
   .hp-card__desc {
     display: none;
+
   }
   .hp-card__btn--detail {
     display: none;
   }
   .hp-card__btn--cart {
-    width: 100%;
+    width: 70%;
+    margin-left: 20px;
   }
   .hp-card__actions {
     width: 100%;
   }
 }
 
+/* 1. Lock the root */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* 2. Clip hero decorative circles properly */
+.hp-hero {
+  overflow: hidden;
+  max-width: 100%;
+}
+
+/* 6. Prevent grid from overflowing on very small screens */
+@media (max-width: 360px) {
+  .hp-grid {
+    grid-template-columns: 1fr;  /* single column on tiny screens */
+  }
+
+  .hp-hero__title {
+    font-size: 26px;
+  }
+}
 /* ════════════════════════════════════════
    SKELETON LOADING
 ════════════════════════════════════════ */

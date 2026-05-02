@@ -259,7 +259,7 @@
   border-top: 1px solid #f1f0ec;
 }
 .sr-card__price {
-  font-family: "Playfair Display", serif;
+  font-family: sans-serif;
   font-size: 17px;
   color: var(--sr-navy);
   font-weight: 600;
@@ -411,7 +411,9 @@
     display: none;
   }
   .sr-card__btn--cart {
-    width: 100%;
+    width: 70%;
+    margin-left: 20px;
+    margin-bottom: 5px;
   }
   .sr-card__actions {
     width: 100%;

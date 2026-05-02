@@ -264,7 +264,7 @@
 }
 
 .cp-card__price {
-  font-family: "Playfair Display", serif;
+  font-family: sans-serif;
   font-size: 17px;
   color: var(--cp-navy);
   font-weight: 600;
@@ -470,7 +470,9 @@
     display: none;
   }
   .cp-card__btn--cart {
-    width: 100%;
+      width: 70%;
+      margin-left: 20px;
+      margin-bottom: 5px;
   }
   .cp-card__actions {
     width: 100%;
