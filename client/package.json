@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "proxy": "hhttps://ecom-final-fixed-backup.onrender.com",
+  "proxy": "https://ecom-final-fixed-backup.onrender.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

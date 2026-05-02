@@ -5,21 +5,43 @@ import connectDB from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
 import categoryRoutes from './routes/categoryRoutes.js'
 import productRoutes from './routes/productRoutes.js'
+import job from "./crone/crone.js";
 
 import cors from 'cors';
 
 //configure env
 dotenv.config();
+job.start();
 
 //connection
 connectDB();
 
-
 //rest object 
 const app = express();
 
+// CORS configuration
+const allowedOrigins = [
+    'http://localhost:3000',
+    'https://fullstack-ecom-app-sagar-das.vercel.app/'
+];
+
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true // If your frontend needs to include credentials (like cookies)
+};
+
+
+
+
 //middlewares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan('dev'));
 
