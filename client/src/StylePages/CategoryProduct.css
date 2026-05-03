@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=DM+Sans:wght@300;400;500&display=swap");
 
-/* ─── Variables — same as homepage ─────────────── */
+/* ─── Variables ─────────────────────────────────── */
 :root {
   --cp-navy: #0b1120;
   --cp-gold: #c9a84c;
   --cp-gold-dim: rgba(201, 168, 76, 0.12);
   --cp-gold-border: rgba(201, 168, 76, 0.25);
-  --cp-bg: #f5f3ef; /* warm cream — homepage bg */
+  --cp-bg: #f5f3ef;
   --cp-white: #ffffff;
-  --cp-surface: #faf9f6; /* warm surface — homepage card surface */
+  --cp-surface: #faf9f6;
   --cp-border: #e8e5df;
   --cp-border-dk: #d4cfc6;
   --cp-text-1: #0b1120;
@@ -18,6 +18,13 @@
   --cp-transition: 0.22s ease;
 }
 
+/* ─── Page wrapper — ensures hero renders correctly ─ */
+.cp-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 /* ─── Hero ──────────────────────────────────────── */
 .cp-hero {
   background: var(--cp-navy);
@@ -25,9 +32,9 @@
   border-bottom: 1px solid rgba(201, 168, 76, 0.15);
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
-/* Decorative ring — mirrors homepage */
 .cp-hero::before {
   content: "";
   position: absolute;
@@ -90,6 +97,7 @@
   background: var(--cp-bg);
   min-height: 60vh;
   padding: 32px 32px 60px;
+  flex: 1;
 }
 
 /* ─── Header row ────────────────────────────────── */
@@ -132,7 +140,7 @@
   background: rgba(201, 168, 76, 0.05);
 }
 
-/* ─── Grid — identical to homepage ─────────────── */
+/* ─── Grid ──────────────────────────────────────── */
 .cp-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -159,17 +167,10 @@
 }
 
 @keyframes cpFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Image wrap ── */
 .cp-card__img-wrap {
   position: relative;
   background: var(--cp-white);
@@ -186,12 +187,12 @@
   height: 100%;
   object-fit: contain;
   transition: transform 0.4s ease;
+  mix-blend-mode: multiply;
 }
 .cp-card:hover .cp-card__img {
   transform: scale(1.05);
 }
 
-/* Quick View button — slides up on hover */
 .cp-card__quick {
   position: absolute;
   bottom: -40px;
@@ -215,7 +216,6 @@
   bottom: 12px;
 }
 
-/* ── Card body ── */
 .cp-card__body {
   padding: 14px 16px 16px;
 }
@@ -254,7 +254,6 @@
   overflow: hidden;
 }
 
-/* ── Card footer ── */
 .cp-card__footer {
   display: flex;
   align-items: center;
@@ -264,7 +263,7 @@
 }
 
 .cp-card__price {
-  font-family: sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 17px;
   color: var(--cp-navy);
   font-weight: 600;
@@ -290,9 +289,7 @@
   background: #f1f0ec;
   color: var(--cp-text-2);
 }
-.cp-card__btn--detail:hover {
-  background: #e2e8f0;
-}
+.cp-card__btn--detail:hover { background: #e2e8f0; }
 
 .cp-card__btn--cart {
   background: var(--cp-navy);
@@ -301,6 +298,61 @@
 .cp-card__btn--cart:hover {
   background: var(--cp-gold);
   color: var(--cp-navy);
+}
+
+/* ─── Empty State — desktop fixed ──────────────── */
+.cp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 72px 40px;
+  background: var(--cp-white);
+  border: 1px solid var(--cp-border);
+  border-radius: var(--cp-radius);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.cp-empty__ring {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--cp-gold-dim);
+  border: 1px solid var(--cp-gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.cp-empty__icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.cp-empty h4 {
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  color: var(--cp-text-1);
+  margin-bottom: 10px;
+}
+
+.cp-empty p {
+  font-size: 14px;
+  color: var(--cp-text-2);
+  margin-bottom: 28px;
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.7;
+}
+
+.cp-empty__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* ─── Buttons ───────────────────────────────────── */
@@ -323,42 +375,72 @@
   color: var(--cp-navy);
   transform: translateY(-1px);
 }
-
-/* ─── Empty State ───────────────────────────────── */
-.cp-empty {
-  text-align: center;
-  padding: 80px 20px;
-  background: var(--cp-white);
-  border: 1px solid var(--cp-border);
-  border-radius: var(--cp-radius);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-}
-.cp-empty__icon {
-  font-size: 48px;
-  margin-bottom: 16px;
-}
-.cp-empty h4 {
-  font-family: "Playfair Display", serif;
-  font-size: 20px;
-  color: var(--cp-text-1);
-  margin-bottom: 8px;
-}
-.cp-empty p {
-  font-size: 14px;
+.cp-btn--ghost {
+  background: transparent;
+  border: 1px solid var(--cp-border-dk);
   color: var(--cp-text-2);
-  margin-bottom: 24px;
+}
+.cp-btn--ghost:hover {
+  border-color: var(--cp-gold);
+  color: var(--cp-navy);
+  background: var(--cp-gold-dim);
+}
+
+/* ─── Pagination ────────────────────────────────── */
+.cp-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.cp-pag__btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1.5px solid #c9a84c;
+  background: transparent;
+  color: #c9a84c;
+  border-radius: 8px;
   font-family: "DM Sans", sans-serif;
-  line-height: 1.6;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cp-pag__btn:hover:not(:disabled) {
+  background: #c9a84c;
+  color: var(--cp-navy);
+}
+.cp-pag__btn--active {
+  background: #c9a84c;
+  color: var(--cp-navy);
+  font-weight: 600;
+}
+.cp-pag__btn--arrow {
+  font-size: 20px;
+}
+.cp-pag__btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.cp-pag__ellipsis {
+  width: 28px;
+  text-align: center;
+  color: var(--cp-text-3);
+  font-size: 13px;
+  user-select: none;
 }
 
 /* ─── Skeleton ──────────────────────────────────── */
 @keyframes cpShimmer {
-  0% {
-    background-position: -600px 0;
-  }
-  100% {
-    background-position: 600px 0;
-  }
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
 }
 .cp-skel {
   background: linear-gradient(90deg, #ece9e3 25%, #f5f3ef 50%, #ece9e3 75%);
@@ -366,74 +448,27 @@
   animation: cpShimmer 1.4s infinite linear;
   border-radius: 6px;
 }
-.cp-card--skeleton {
-  pointer-events: none;
-}
-.cp-skel--img {
-  width: 100%;
-  height: 190px;
-  border-radius: 0;
-}
-.cp-skel--category {
-  width: 60px;
-  height: 11px;
-  margin-bottom: 10px;
-}
-.cp-skel--title {
-  width: 85%;
-  height: 17px;
-  margin-bottom: 10px;
-}
-.cp-skel--desc {
-  width: 100%;
-  height: 12px;
-  margin-bottom: 7px;
-}
-.cp-skel--desc-short {
-  width: 65%;
-  margin-bottom: 16px;
-}
-.cp-skel--price {
-  width: 80px;
-  height: 19px;
-}
-.cp-skel--btn {
-  width: 64px;
-  height: 31px;
-  border-radius: 6px;
-}
+.cp-card--skeleton { pointer-events: none; }
+.cp-skel--img       { width: 100%; height: 190px; border-radius: 0; }
+.cp-skel--category  { width: 60px;  height: 11px; margin-bottom: 10px; }
+.cp-skel--title     { width: 85%;   height: 17px; margin-bottom: 10px; }
+.cp-skel--desc      { width: 100%;  height: 12px; margin-bottom: 7px; }
+.cp-skel--desc-short{ width: 65%;   margin-bottom: 16px; }
+.cp-skel--price     { width: 80px;  height: 19px; }
+.cp-skel--btn       { width: 64px;  height: 31px; border-radius: 6px; }
 
-/* Staggered shimmer wave */
-.cp-grid .cp-card--skeleton:nth-child(1) .cp-skel {
-  animation-delay: 0s;
-}
-.cp-grid .cp-card--skeleton:nth-child(2) .cp-skel {
-  animation-delay: 0.07s;
-}
-.cp-grid .cp-card--skeleton:nth-child(3) .cp-skel {
-  animation-delay: 0.14s;
-}
-.cp-grid .cp-card--skeleton:nth-child(4) .cp-skel {
-  animation-delay: 0.21s;
-}
-.cp-grid .cp-card--skeleton:nth-child(5) .cp-skel {
-  animation-delay: 0.28s;
-}
-.cp-grid .cp-card--skeleton:nth-child(6) .cp-skel {
-  animation-delay: 0.35s;
-}
+.cp-grid .cp-card--skeleton:nth-child(1) .cp-skel { animation-delay: 0s; }
+.cp-grid .cp-card--skeleton:nth-child(2) .cp-skel { animation-delay: 0.07s; }
+.cp-grid .cp-card--skeleton:nth-child(3) .cp-skel { animation-delay: 0.14s; }
+.cp-grid .cp-card--skeleton:nth-child(4) .cp-skel { animation-delay: 0.21s; }
+.cp-grid .cp-card--skeleton:nth-child(5) .cp-skel { animation-delay: 0.28s; }
+.cp-grid .cp-card--skeleton:nth-child(6) .cp-skel { animation-delay: 0.35s; }
 
 /* ─── Responsive ────────────────────────────────── */
 @media (max-width: 768px) {
-  .cp-hero {
-    padding: 36px 24px 32px;
-  }
-  .cp-hero__title {
-    font-size: 28px;
-  }
-  .cp-section {
-    padding: 24px 16px 48px;
-  }
+  .cp-hero        { padding: 36px 24px 32px; }
+  .cp-hero__title { font-size: 28px; }
+  .cp-section     { padding: 24px 16px 48px; }
   .cp-header {
     flex-direction: column;
     align-items: flex-start;
@@ -446,35 +481,20 @@
 }
 
 @media (max-width: 480px) {
-  .cp-hero {
-    padding: 28px 16px;
-  }
-  .cp-hero__title {
-    font-size: 24px;
-  }
+  .cp-hero        { padding: 28px 16px; }
+  .cp-hero__title { font-size: 24px; }
   .cp-grid {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
-  .cp-card__img-wrap {
-    height: 140px;
-    padding: 8px;
-  }
-  .cp-card__body {
-    padding: 10px;
-  }
-  .cp-card__desc {
-    display: none;
-  }
-  .cp-card__btn--detail {
-    display: none;
-  }
-  .cp-card__btn--cart {
-      width: 70%;
-      margin-left: 20px;
-      margin-bottom: 5px;
-  }
-  .cp-card__actions {
-    width: 100%;
-  }
+  .cp-card__img-wrap { height: 140px; padding: 8px; }
+  .cp-card__body     { padding: 10px; }
+  .cp-card__desc     { display: none; }
+  .cp-card__btn--detail { display: none; }
+
+  /* price + cart on same line */
+  .cp-card__footer    { flex-wrap: nowrap; gap: 6px; }
+  .cp-card__price     { font-size: 13px; white-space: nowrap; flex-shrink: 0; }
+  .cp-card__actions   { width: auto; flex-shrink: 0; }
+  .cp-card__btn--cart { width: auto; padding: 7px 9px; font-size: 11px; }
 }
