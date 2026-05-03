@@ -116,7 +116,7 @@ const Login = () => {
                                 className="auth-btn-primary"
                                 disabled={loading}
                             >
-                                {loading ? <><span className="auth-spinner" /> Signing in…</> : "Sign In →"}
+                                {loading ? <><span className="auth-spinner" /> Login in…</> : "Sign In →"}
                             </button>
 
                             {/* Test login */}

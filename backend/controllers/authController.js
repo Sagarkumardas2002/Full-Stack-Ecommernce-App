@@ -57,7 +57,24 @@ export const registerController = async (req, res) => {
     }
 };
 
-
+// get all users
+export const getAllUsersController = async (_req, res) => {
+    try {
+        const users = await userModel.find({}, '-password -answer');
+        res.status(200).send({
+            success: true,
+            message: "All Users Fetched Successfully",
+            users,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error While Getting Users",
+            error,
+        });
+    }
+};
 
 //POST LOGIN
 export const loginController = async (req, res) => {
