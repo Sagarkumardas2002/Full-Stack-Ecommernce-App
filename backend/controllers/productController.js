@@ -380,35 +380,6 @@ export const searchProductController = async (req, res) => {
 };
 
 
-// ─── Related Products ─────────────────────────────────────────────────────────
-// export const relatedProductController = async (req, res) => {
-//     try {
-//         const { pid, cid } = req.params;
-
-//         const products = await productModel.find({
-//             category: cid,
-//             _id: { $ne: pid },
-//         })
-//             .select("-photo")
-//             .limit(10)
-//             .populate("category");
-
-//         res.status(200).send({
-//             success: true,
-//             products,
-//         });
-
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).send({
-//             success: false,
-//             message: "Error getting related products",
-//             error,
-//         });
-//     }
-// };
-
-
 // ─── Related Products (with pagination) ──────────────────────────────────────
 export const relatedProductController = async (req, res) => {
     try {
@@ -416,7 +387,7 @@ export const relatedProductController = async (req, res) => {
 
         // Pagination — ?page=1&limit=10  (defaults to page 1, limit 10)
         const page = Math.max(1, parseInt(req.query.page) || 1);
-        const limit = Math.max(1, parseInt(req.query.limit) || 10);
+        const limit = Math.max(1, parseInt(req.query.limit) || 8);
         const skip = (page - 1) * limit;
 
         const filter = { category: cid, _id: { $ne: pid } };

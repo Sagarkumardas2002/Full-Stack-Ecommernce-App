@@ -728,7 +728,7 @@
 }
 
 
-/* ─── APPEND THIS TO YOUR Productdetails.css ─────── */
+/* ──/* ─── APPEND THIS TO YOUR Productdetails.css ─────── */
 
 /* ─── Quick View overlay ─────────────────────────── */
 .qv-overlay {
@@ -915,42 +915,33 @@
 }
 
 .pd-pag__btn {
-  min-width: 36px;
-  height: 36px;
-  padding: 0 10px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--card-border);
-  background: var(--card-bg);
-  color: var(--text-mid);
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1.5px solid #c9a84c;
+  background: transparent;
+  color: #c9a84c;
+  border-radius: 8px;
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition:
-    background var(--transition),
-    border-color var(--transition),
-    color var(--transition);
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .pd-pag__btn:hover:not(:disabled) {
-  border-color: var(--gold-border);
-  background: var(--gold-light);
-  color: var(--text-dark);
+  background: #c9a84c;
+  color: var(--navy);
 }
 .pd-pag__btn--active {
-  background: var(--navy);
-  border-color: var(--navy);
-  color: #fff;
-}
-.pd-pag__btn--active:hover {
-  background: var(--navy) !important;
-  color: #fff !important;
+  background: #c9a84c;
+  color: var(--navy);
+  font-weight: 600;
 }
 .pd-pag__btn--arrow {
   font-size: 18px;
-  color: var(--text-mid);
 }
 .pd-pag__btn:disabled {
   opacity: 0.35;
@@ -962,6 +953,29 @@
   color: var(--text-muted);
   font-size: 13px;
   user-select: none;
+}
+
+/* ─── Mobile card footer fix — price + cart same line ── */
+@media (max-width: 640px) {
+  .pd-card__footer {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 8px;
+  }
+  .pd-card__price {
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .pd-card__btns {
+    width: auto;
+    flex-shrink: 0;
+  }
+  .pd-card__btn-cart {
+    width: auto;
+    padding: 7px 9px;
+    font-size: 11px;
+  }
 }
 
 /* ─── Similar section count badge ───────────────── */

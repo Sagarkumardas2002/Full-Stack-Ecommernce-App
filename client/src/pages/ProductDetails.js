@@ -345,8 +345,7 @@ import toast from 'react-hot-toast';
 import { useCart } from '../context/cart';
 import './../StylePages/Productdetails.css';
 
-// baseURL is already set in config/axios.js, so just use relative paths
-const PHOTO = (id) => `/api/v1/product/product-photo/${id}`;
+const PHOTO = (id) => `${axios.defaults.baseURL}/api/v1/product/product-photo/${id}`;
 const PER_PAGE = 10;
 
 /* ─────────────────────────────────────────────────────
@@ -474,7 +473,9 @@ const ProductCard = ({ p, onAddToCart, onDetails, onQuickView, delay = 0 }) => (
             </button>
         </div>
         <div className="pd-card__body">
-            <div className="pd-card__badge">Product</div>
+            <div className="pd-card__badge">
+                <span className="pd-info__category-chip">{p.category?.name || 'Product'}</span>
+            </div>
             <div className="pd-card__name">{p.name}</div>
             <div className="pd-card__desc">{p.description?.substring(0, 55)}…</div>
             <div className="pd-card__footer">
