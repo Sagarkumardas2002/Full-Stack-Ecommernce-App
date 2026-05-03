@@ -159,14 +159,8 @@
 }
 
 @keyframes srFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ── Image wrap ── */
@@ -186,6 +180,7 @@
   height: 100%;
   object-fit: contain;
   transition: transform 0.4s ease;
+  mix-blend-mode: multiply;
 }
 .sr-card:hover .sr-card__img {
   transform: scale(1.05);
@@ -222,7 +217,7 @@
   font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--sr-gold);
+  color: var(--sr-text-3);
   margin-bottom: 4px;
   font-family: "DM Sans", sans-serif;
   font-weight: 600;
@@ -259,7 +254,7 @@
   border-top: 1px solid #f1f0ec;
 }
 .sr-card__price {
-  font-family: sans-serif;
+  font-family: "Playfair Display", serif;
   font-size: 17px;
   color: var(--sr-navy);
   font-weight: 600;
@@ -364,68 +359,93 @@
   flex-wrap: wrap;
 }
 
+/* ─── Pagination ─────────────────────────────────── */
+.sr-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+  padding-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.sr-page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sr-page-btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1.5px solid var(--sr-gold);
+  background: transparent;
+  color: var(--sr-gold);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sr-page-btn:hover:not(:disabled) {
+  background: var(--sr-gold);
+  color: #fff;
+}
+
+.sr-page-btn--active {
+  background: var(--sr-gold);
+  color: #fff;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.sr-page-btn--nav {
+  padding: 0 16px;
+  font-size: 13px;
+}
+
+.sr-page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  border-color: #ccc;
+  color: #ccc;
+}
+
+.sr-page-ellipsis {
+  color: var(--sr-text-3);
+  font-size: 16px;
+  padding: 0 4px;
+  line-height: 40px;
+}
+
 /* ─── Responsive ────────────────────────────────── */
 @media (max-width: 768px) {
-  .sr-hero {
-    padding: 36px 24px 32px;
-  }
-  .sr-hero__title {
-    font-size: 28px;
-  }
-  .sr-section {
-    padding: 24px 16px 48px;
-  }
-  .sr-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .sr-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 14px;
-  }
+  .sr-hero { padding: 36px 24px 32px; }
+  .sr-hero__title { font-size: 28px; }
+  .sr-section { padding: 24px 16px 48px; }
+  .sr-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .sr-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .sr-pagination { gap: 6px; }
+  .sr-page-btn { min-width: 36px; height: 36px; font-size: 13px; }
+  .sr-page-btn--nav { padding: 0 12px; }
 }
 
 @media (max-width: 480px) {
-  .sr-hero {
-    padding: 28px 16px;
-  }
-  .sr-hero__title {
-    font-size: 22px;
-  }
-  .sr-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .sr-card__img-wrap {
-    height: 140px;
-    padding: 8px;
-  }
-  .sr-card__body {
-    padding: 10px;
-  }
-  .sr-card__desc {
-    display: none;
-  }
-  .sr-card__btn--detail {
-    display: none;
-  }
-  .sr-card__btn--cart {
-    width: 70%;
-    margin-left: 20px;
-    margin-bottom: 5px;
-  }
-  .sr-card__actions {
-    width: 100%;
-  }
-  .sr-empty {
-    padding: 48px 16px;
-  }
-  .sr-empty__actions {
-    flex-direction: column;
-  }
-  .sr-btn {
-    width: 100%;
-    text-align: center;
-  }
+  .sr-hero { padding: 28px 16px; }
+  .sr-hero__title { font-size: 22px; }
+  .sr-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sr-card__img-wrap { height: 140px; padding: 8px; }
+  .sr-card__body { padding: 10px; }
+  .sr-card__desc { display: none; }
+  .sr-card__btn--detail { display: none; }
+  .sr-card__btn--cart { width: 70%; margin-left: 20px; margin-bottom: 5px; }
+  .sr-card__actions { width: 100%; }
+  .sr-empty { padding: 48px 16px; }
+  .sr-empty__actions { flex-direction: column; }
+  .sr-btn { width: 100%; text-align: center; }
+  .sr-page-btn--nav { padding: 0 10px; font-size: 12px; }
 }
