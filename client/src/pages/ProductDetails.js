@@ -346,7 +346,7 @@ import { useCart } from '../context/cart';
 import './../StylePages/Productdetails.css';
 
 const PHOTO = (id) => `${axios.defaults.baseURL}/api/v1/product/product-photo/${id}`;
-const PER_PAGE = 10;
+const PER_PAGE = 8;
 
 /* ─────────────────────────────────────────────────────
    Skeleton Card
