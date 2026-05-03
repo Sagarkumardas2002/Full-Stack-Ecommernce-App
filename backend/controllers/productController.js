@@ -361,7 +361,8 @@ export const searchProductController = async (req, res) => {
                 { name: { $regex: keyword, $options: "i" } },
                 { description: { $regex: keyword, $options: "i" } },
             ],
-        }).select("-photo");
+        }).select("-photo")
+            .populate("category");   
 
         res.status(200).json({
             success: true,
@@ -380,20 +381,62 @@ export const searchProductController = async (req, res) => {
 
 
 // ─── Related Products ─────────────────────────────────────────────────────────
+// export const relatedProductController = async (req, res) => {
+//     try {
+//         const { pid, cid } = req.params;
+
+//         const products = await productModel.find({
+//             category: cid,
+//             _id: { $ne: pid },
+//         })
+//             .select("-photo")
+//             .limit(10)
+//             .populate("category");
+
+//         res.status(200).send({
+//             success: true,
+//             products,
+//         });
+
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).send({
+//             success: false,
+//             message: "Error getting related products",
+//             error,
+//         });
+//     }
+// };
+
+
+// ─── Related Products (with pagination) ──────────────────────────────────────
 export const relatedProductController = async (req, res) => {
     try {
         const { pid, cid } = req.params;
 
-        const products = await productModel.find({
-            category: cid,
-            _id: { $ne: pid },
-        })
-            .select("-photo")
-            .limit(3)
-            .populate("category");
+        // Pagination — ?page=1&limit=10  (defaults to page 1, limit 10)
+        const page = Math.max(1, parseInt(req.query.page) || 1);
+        const limit = Math.max(1, parseInt(req.query.limit) || 10);
+        const skip = (page - 1) * limit;
+
+        const filter = { category: cid, _id: { $ne: pid } };
+
+        // Run count + paginated fetch in parallel
+        const [total, products] = await Promise.all([
+            productModel.countDocuments(filter),
+            productModel
+                .find(filter)
+                .select("-photo")
+                .skip(skip)
+                .limit(limit)
+                .populate("category"),
+        ]);
 
         res.status(200).send({
             success: true,
+            total,          // <-- total count so frontend can build pagination
+            page,
+            limit,
             products,
         });
 
@@ -406,7 +449,6 @@ export const relatedProductController = async (req, res) => {
         });
     }
 };
-
 
 // ─── Products By Category ─────────────────────────────────────────────────────
 export const productCategoryController = async (req, res) => {
