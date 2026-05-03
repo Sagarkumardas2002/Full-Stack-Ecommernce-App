@@ -1,67 +1,263 @@
-import React, { useState } from 'react'
-import Layout from '../../components/Layout/Layout'
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast'
+
+
+// export default Register
+import React, { useState } from "react";
+import Layout from "../../components/Layout/Layout";
+import axios from "../../config/axios";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import "../../styles/AuthStyles.css";
 
+/* ─── Password strength logic ──────────────────── */
+const getStrength = (pwd) => {
+    if (!pwd) return { score: 0, label: "", cls: "" };
+    let score = 0;
+    if (pwd.length >= 8) score++;
+    if (/[A-Z]/.test(pwd)) score++;
+    if (/[0-9]/.test(pwd)) score++;
+    if (/[^A-Za-z0-9]/.test(pwd)) score++;
+
+    const map = [
+        { label: "Too weak", cls: "weak" },
+        { label: "Weak", cls: "weak" },
+        { label: "Fair", cls: "fair" },
+        { label: "Good", cls: "good" },
+        { label: "Strong", cls: "strong" },
+    ];
+    return { score, ...map[score] };
+};
+
+const rules = [
+    { id: "len", test: (p) => p.length >= 8, text: "At least 8 characters" },
+    { id: "upper", test: (p) => /[A-Z]/.test(p), text: "One uppercase letter" },
+    { id: "num", test: (p) => /[0-9]/.test(p), text: "One number" },
+    { id: "symbol", test: (p) => /[^A-Za-z0-9]/.test(p), text: "One special character (!@#$…)" },
+];
 
 const Register = () => {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [phone, setPhone] = useState("")
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
     const [answer, setAnswer] = useState("");
+    const [showPass, setShowPass] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    //form handleSubmit
+
+    const strength = getStrength(password);
+    const allRulesPass = rules.every(r => r.test(password));
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!allRulesPass) {
+            toast.error("Please choose a stronger password");
+            return;
+        }
+
         try {
-            const res = await axios.post('https://full-stack-ecommernce-app-backend.onrender.com/api/v1/auth/register', { name, email, password, phone, address, answer });
+            setLoading(true);
+            const res = await axios.post("/api/v1/auth/register", {
+                name, email, password, phone, address, answer,
+            });
             if (res && res.data.success) {
-                toast.success(res.data && res.data.message);
+                toast.success(res.data.message);
                 navigate("/login");
             } else {
                 toast.error(res.data.message);
             }
         } catch (error) {
-            console.log(error);
             toast.error("Something went wrong");
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <Layout title={"Register-Sagar Ecom App..."}>
-            <div className="form-container" >
-                <form onSubmit={handleSubmit} >
-                    <h3 className='title'>REGISTER  PAGE</h3>
-                    <div className="mb-3">
-                        <input type="text" value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            className="form-control" id="exampleInputName" placeholder='Name' required />
-                    </div>
-                    <div className="mb-3">
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" id="exampleInputemail" placeholder='Email' required />
-                    </div>
-                    <div className="mb-3">
-                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" id="exampleInputPassword" placeholder='Password' required />
-                    </div>
-                    <div className="mb-3">
-                        <input type="number" value={phone} onChange={(e) => setPhone(e.target.value)} className="form-control" id="exampleInputPhone" placeholder='Number' required />
-                    </div>
-                    <div className="mb-3">
-                        <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} className="form-control" id="exampleInputAddress" placeholder='Address' required />
-                    </div>
-                    <div className="mb-3">
-                        <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)} className="form-control" id="exampleInputAddress" placeholder='What is Your Secret Word  ' required />
+        <Layout title="Register — TechVault">
+            <div className="auth-page">
+                <div className="auth-card">
+
+                    {/* ── Header ── */}
+                    <div className="auth-card__header">
+                        <div className="auth-card__tag">New Account</div>
+                        <h1 className="auth-card__title">Join <em>TechVault</em></h1>
+                        <p className="auth-card__sub">Create your account to start shopping</p>
                     </div>
 
-                    <button type="submit" className="btn btn-primary">REGISTER</button>
-                </form>
+                    {/* ── Body ── */}
+                    <div className="auth-card__body">
+                        <form onSubmit={handleSubmit}>
+
+                            {/* Name */}
+                            <div className="auth-field">
+                                <label className="auth-field__label">Full Name</label>
+                                <div className="auth-field__input-wrap">
+                                    <span className="auth-field__icon">👤</span>
+                                    <input
+                                        type="text"
+                                        className="auth-field__input"
+                                        placeholder="Your full name"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Email */}
+                            <div className="auth-field">
+                                <label className="auth-field__label">Email Address</label>
+                                <div className="auth-field__input-wrap">
+                                    <span className="auth-field__icon">✉</span>
+                                    <input
+                                        type="email"
+                                        className="auth-field__input"
+                                        placeholder="you@example.com"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Password + strength */}
+                            <div className="auth-field">
+                                <label className="auth-field__label">Password</label>
+                                <div className="auth-field__input-wrap">
+                                    <span className="auth-field__icon">🔒</span>
+                                    <input
+                                        type={showPass ? "text" : "password"}
+                                        className={`auth-field__input${password
+                                            ? allRulesPass ? " success" : " error"
+                                            : ""
+                                            }`}
+                                        placeholder="Create a strong password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
+                                    <button
+                                        type="button"
+                                        className="auth-field__eye"
+                                        onClick={() => setShowPass(!showPass)}
+                                        tabIndex={-1}
+                                    >
+                                        {showPass ? "🙈" : "👁"}
+                                    </button>
+                                </div>
+
+                                {/* Strength bars */}
+                                {password && (
+                                    <div className="auth-strength">
+                                        <div className="auth-strength__bars">
+                                            {[1, 2, 3, 4].map(i => (
+                                                <div
+                                                    key={i}
+                                                    className={`auth-strength__bar${i <= strength.score
+                                                        ? ` active-${strength.cls}`
+                                                        : ""
+                                                        }`}
+                                                />
+                                            ))}
+                                        </div>
+                                        <div className={`auth-strength__label ${strength.cls}`}>
+                                            <span className="auth-rule__dot" />
+                                            {strength.label}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Rules checklist */}
+                                {password && (
+                                    <div className="auth-rules">
+                                        {rules.map(r => (
+                                            <div
+                                                key={r.id}
+                                                className={`auth-rule ${r.test(password) ? "pass" : "fail"}`}
+                                            >
+                                                <span className="auth-rule__dot" />
+                                                {r.test(password) ? "✓" : "✗"} {r.text}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Phone */}
+                            <div className="auth-field">
+                                <label className="auth-field__label">Phone Number</label>
+                                <div className="auth-field__input-wrap">
+                                    <span className="auth-field__icon">📞</span>
+                                    <input
+                                        type="tel"
+                                        className="auth-field__input"
+                                        placeholder="Your phone number"
+                                        value={phone}
+                                        onChange={(e) => setPhone(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Address */}
+                            <div className="auth-field">
+                                <label className="auth-field__label">Delivery Address</label>
+                                <div className="auth-field__input-wrap">
+                                    <span className="auth-field__icon">📍</span>
+                                    <input
+                                        type="text"
+                                        className="auth-field__input"
+                                        placeholder="Your delivery address"
+                                        value={address}
+                                        onChange={(e) => setAddress(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Secret word */}
+                            <div className="auth-field">
+                                <label className="auth-field__label">Secret Word</label>
+                                <div className="auth-field__input-wrap">
+                                    <span className="auth-field__icon">🔑</span>
+                                    <input
+                                        type="text"
+                                        className="auth-field__input"
+                                        placeholder="Password Recovery Key"
+                                        value={answer}
+                                        onChange={(e) => setAnswer(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <hr className="auth-divider" />
+
+                            <button
+                                type="submit"
+                                className="auth-btn-primary"
+                                disabled={loading || !allRulesPass}
+                            >
+                                {loading
+                                    ? <><span className="auth-spinner" /> Creating account…</>
+                                    : "Create Account →"}
+                            </button>
+
+                            <div className="auth-footer">
+                                Already have an account?{" "}
+                                <button type="button" onClick={() => navigate("/login")}>
+                                    Login in
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
             </div>
         </Layout>
-    )
-}
+    );
+};
 
-export default Register
+export default Register;

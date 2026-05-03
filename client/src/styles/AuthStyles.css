@@ -1,54 +1,404 @@
-/* ===================================
-========= register page  */
-.form-container {
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+/* ─── Variables ──────────────────────────────────── */
+:root {
+  --navy:         #0b1120;
+  --gold:         #c9a84c;
+  --gold-hover:   #d4b355;
+  --gold-light:   rgba(201,168,76,.1);
+  --gold-border:  rgba(201,168,76,.3);
+  --gold-dim:     rgba(201,168,76,.05);
+
+  --page-bg:      #f5f3ef;
+  --card-bg:      #ffffff;
+  --card-border:  #e8e5df;
+
+  --text-dark:    #0b1120;
+  --text-mid:     #475569;
+  --text-muted:   #94a3b8;
+  --line-color:   #d1d5db;
+  --line-focus:   #0b1120;
+
+  --red:          #e53e3e;
+  --green:        #38a169;
+  --orange:       #dd6b20;
+  --yellow:       #d69e2e;
+
+  --radius:       10px;
+  --radius-sm:    4px;
+  --shadow:       0 4px 24px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+  --transition:   .18s ease;
+
+  --font-serif:   'Playfair Display', serif;
+  --font-sans:    'DM Sans', sans-serif;
+}
+
+/* ─── Page wrapper ───────────────────────────────── */
+.auth-page {
+  font-family: var(--font-sans);
+  background: var(--page-bg);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 70vh;
-  flex-direction: column;
-  background-color: #ffdee9;
-  background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
+  padding: 8px 16px;
+  margin-top: -20px;
+  margin-bottom: -20px;
 }
 
-.form-container form {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  padding: 20px;
-  background-color: #fff;
+/* ─── Card ───────────────────────────────────────── */
+.auth-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 360px;
+  overflow: hidden;
+  animation: authCardIn .35s ease both;
 }
 
-.form-container form .title {
-  text-align: center;
-  margin-bottom: 15px;
-  font-weight: bold;
-  font-family: "Playfair Display", serif;
+@keyframes authCardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.form-container form input {
+/* ─── Header ─────────────────────────────────────── */
+.auth-card__header {
+  background: var(--navy);
+  padding: 12px 28px 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-card__header::before {
+  content: '';
+  position: absolute;
+  right: -30px; top: -30px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  border: 22px solid rgba(201,168,76,.08);
+  pointer-events: none;
+}
+
+.auth-card__tag {
+  display: inline-block;
+  background: var(--gold-light);
+  border: 1px solid var(--gold-border);
+  border-radius: 3px;
+  padding: 2px 8px;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.auth-card__title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 1px;
+}
+
+.auth-card__title em {
+  color: var(--gold);
+  font-style: normal;
+}
+
+.auth-card__sub {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+  font-weight: 300;
+}
+
+/* ─── Body ───────────────────────────────────────── */
+.auth-card__body {
+  padding: 14px 28px 20px;
+}
+
+/* ─── Field — bottom border only, like the image ─── */
+.auth-field {
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.auth-field__label {
+  display: none; /* hidden — placeholder acts as label like in the image */
+}
+
+.auth-field__input-wrap {
+  position: relative;
+}
+
+.auth-field__icon {
+  display: none;
+}
+
+/* KEY STYLE — bottom border only, no box */
+.auth-field__input {
+  width: 100%;
+  background: transparent;
   border: none;
-  border-bottom: 1px solid #000;
+  border-bottom: 1.5px solid var(--line-color);
   border-radius: 0;
+  padding: 10px 28px 5px 0;
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color var(--transition);
 }
 
-.form-container form button {
-  border: 1px solid black;
-  border-radius: 0;
-  background-color: #000;
-  color: white;
-  width: 250px;
+.auth-field__input::placeholder {
+  color: rgb(199, 188, 188);
+  font-weight: 300;
+  font-size: 13px;
 }
 
-.form-container form button:hover {
-  border: 1px solid black;
-  background: #000000; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.auth-field__input:focus {
+  border-bottom-color: var(--line-focus);
+  background: transparent;
+  box-shadow: none;
 }
 
+.auth-field__input.error   { border-bottom-color: var(--red); }
+.auth-field__input.success { border-bottom-color: var(--green); }
+
+/* password eye toggle */
+.auth-field__eye {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: .65;
+  transition: opacity var(--transition);
+  padding: 0;
+  line-height: 1;
+}
+.auth-field__eye:hover { opacity: .7; }
+
+/* ─── Password strength ──────────────────────────── */
+.auth-strength {
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+
+.auth-strength__bars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 4px;
+}
+
+.auth-strength__bar {
+  flex: 1;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--line-color);
+  transition: background .2s ease;
+}
+
+.auth-strength__bar.active-weak   { background: var(--red); }
+.auth-strength__bar.active-fair   { background: var(--orange); }
+.auth-strength__bar.active-good   { background: var(--yellow); }
+.auth-strength__bar.active-strong { background: var(--green); }
+
+.auth-strength__label {
+  font-family: sans-serif   ;
+  font-size: 8.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.auth-strength__label.weak   { color: var(--red); }
+.auth-strength__label.fair   { color: var(--orange); }
+.auth-strength__label.good   { color: var(--yellow); }
+.auth-strength__label.strong { color: var(--green); }
+
+/* rules checklist */
+.auth-rules {
+  margin-top: 6px;
+  margin-bottom: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 8px;
+}
+
+.auth-rule {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  font-weight: 400;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color var(--transition);
+}
+
+.auth-rule.pass { color: var(--green); }
+.auth-rule.fail { color: var(--red); }
+
+.auth-rule__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ─── Divider ────────────────────────────────────── */
+.auth-divider {
+  border: none;
+  border-top: 1px solid #f1f0ec;
+  margin: 16px 0 12px;
+}
+
+/* ─── Primary button — dark filled, like image ───── */
+.auth-btn-primary {
+  width: 100%;
+  background: var(--navy);
+  border: none;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 13px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.auth-btn-primary:hover:not(:disabled) {
+  background: #1a2438;
+  transform: translateY(-1px);
+}
+.auth-btn-primary:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── Ghost button — gold outline ────────────────── */
+.auth-btn-ghost {
+  width: 100%;
+  background: transparent;
+  border: 3px solid var(--gold-border);
+  color: var(--gold);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 11px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.auth-btn-ghost:hover {
+  background: var(--gold-light);
+  border-color: var(--gold);
+}
+
+/* ─── Test box ───────────────────────────────────── */
+.auth-test-box {
+  background: var(--gold-dim);
+  border: 1px dashed var(--gold-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.auth-test-box__label {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+
+.auth-test-box__row {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  color: var(--text-mid);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.auth-test-box__key {
+  font-weight: 600;
+  color: var(--text-dark);
+  min-width: 56px;
+}
+
+/* ─── Footer links ───────────────────────────────── */
+.auth-footer {
+  text-align: center;
+  margin-top: 10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-mid);
+}
+
+.auth-footer a,
+.auth-footer button {
+  background: none;
+  border: none;
+  color: var(--navy);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+  font-size: 12px;
+  font-family: var(--font-sans);
+  transition: color var(--transition);
+}
+.auth-footer a:hover,
+.auth-footer button:hover { color: var(--gold); }
+
+/* ─── Spinner ────────────────────────────────────── */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.auth-spinner {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 420px) {
+  .auth-page          { align-items: flex-start;}
+  .auth-card__header  { padding: 10px 16px 8px; }
+  .auth-card__body    { padding: 12px 16px 16px; }
+  .auth-rules         { grid-template-columns: 1fr; }
+  
+}
