@@ -7,9 +7,9 @@
   flex-shrink: 0;
   display: flex;
   align-items: stretch;
-  height: 38px;
-  min-width: 220px;
-  border-radius: 7px;
+  height: 34px;           /* ← reduced from 38px */
+  min-width: 340px;       /* ← enlarged from 220px */
+  border-radius: 999px;
   border: 2px solid #c9a84c;
   overflow: hidden;
   background: #fff;
@@ -28,15 +28,18 @@
   min-width: 0;
   border: none;
   outline: none;
-  padding: 0 13px;
+  padding: 0 16px;
   font-size: 13.5px;
   color: #111;
   background: #fff;
   font-family: "DM Sans", sans-serif;
+  border-radius: 999px 0 0 999px;
 }
+
 .tv-searchbar__input::placeholder {
   color: #aaa;
 }
+
 .tv-searchbar__input:disabled {
   opacity: 0.6;
 }
@@ -47,7 +50,7 @@
 }
 
 .tv-searchbar__btn {
-  width: 65px;
+  width: 52px;
   flex-shrink: 0;
   border: none;
   background: #c9a84c;
@@ -56,18 +59,23 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border-radius: 0 999px 999px 0;
   transition: background 0.18s;
 }
+
 .tv-searchbar__btn:hover {
   background: #d4b45a;
 }
+
 .tv-searchbar__btn:active {
   background: #b8943e;
 }
+
 .tv-searchbar__btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
+
 .tv-searchbar__btn--loading {
   background: #b8943e;
 }
@@ -81,22 +89,21 @@
   margin-left: 0;
   min-width: 0;
   width: 100%;
-  border-radius: 7px;
+  border-radius: 999px;
   margin-bottom: 10px;
 }
 
 /* ═══════════════════════════════════════
-   MOBILE — compact inline, single row
+   TABLET
 ═══════════════════════════════════════ */
 @media (max-width: 900px) {
   .tv-searchbar {
-    /* flex: 1 lets it grow into available space between brand and icons */
     flex: 1;
     min-width: 0;
     margin-left: 10px;
     margin-right: 0;
-    height: 34px;
-    border-radius: 6px;
+    height: 30px;           /* ← reduced */
+    border-radius: 999px;
     border: 1.5px solid #c9a84c;
     background: rgba(255, 255, 255, 0.1);
   }
@@ -107,10 +114,11 @@
   }
 
   .tv-searchbar__input {
-    padding: 0 8px 0 12px;
+    padding: 0 8px 0 16px;
     font-size: 13px;
     background: transparent;
     color: #fff;
+    border-radius: 999px 0 0 999px;
   }
 
   .tv-searchbar__input::placeholder {
@@ -118,33 +126,40 @@
   }
 
   .tv-searchbar__btn {
-    width: 36px;
+    width: 38px;
     background: #c9a84c;
+    border-radius: 0 999px 999px 0;
   }
 
   .tv-searchbar__btn svg {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
   }
 }
 
+/* ═══════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════ */
 @media (max-width: 480px) {
   .tv-searchbar {
-    height: 32px;
+    height: 23px;           /* ← reduced */
     margin-left: 8px;
+    border-radius: 999px;
   }
 
   .tv-searchbar__input {
     font-size: 12px;
-    padding: 0 6px 0 10px;
+    padding: 0 6px 0 14px;
+    border-radius: 999px 0 0 999px;
   }
 
   .tv-searchbar__btn {
-    width: 38px;
+    width: 36px;
+    border-radius: 0 999px 999px 0;
   }
 
   .tv-searchbar__btn svg {
-    width: 13px;
-    height: 13px;
+    width: 12px;
+    height: 12px;
   }
 } 

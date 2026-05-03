@@ -89,7 +89,7 @@ const SearchInput = () => {
             <input
                 type="search"
                 className="tv-searchbar__input"
-                placeholder="Search products…"
+                placeholder="Search the latest products here…"
                 value={values.keyword}
                 onChange={(e) => setValues({ ...values, keyword: e.target.value })}
                 aria-label="Search products"
