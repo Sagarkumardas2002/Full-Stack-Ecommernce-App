@@ -333,7 +333,7 @@ const HomePage = () => {
                                 <div key={p._id} className="hp-card">
                                     <div className="hp-card__img-wrap">
                                         <img
-                                            src={`https://ecom-final-fixed-backup.onrender.com/api/v1/product/product-photo/${p._id}`}
+                                            src={`https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/product-photo/${p._id}`}
                                             alt={p.name}
                                             className="hp-card__img"
                                         />
