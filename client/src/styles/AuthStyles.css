@@ -31,19 +31,21 @@
 
   --font-serif:   'Playfair Display', serif;
   --font-sans:    'DM Sans', sans-serif;
+
+  /* navbar + footer height — adjust to match your Layout component */
+  --navbar-height: 64px;
+  --footer-height: 60px;
 }
 
 /* ─── Page wrapper ───────────────────────────────── */
 .auth-page {
   font-family: var(--font-sans);
   background: var(--page-bg);
-  min-height: 100vh;
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
-  margin-top: -20px;
-  margin-bottom: -20px;
+  padding: 32px 16px;
 }
 
 /* ─── Card ───────────────────────────────────────── */
@@ -121,14 +123,14 @@
   padding: 14px 28px 20px;
 }
 
-/* ─── Field — bottom border only, like the image ─── */
+/* ─── Field ──────────────────────────────────────── */
 .auth-field {
   margin-bottom: 4px;
   position: relative;
 }
 
 .auth-field__label {
-  display: none; /* hidden — placeholder acts as label like in the image */
+  display: none;
 }
 
 .auth-field__input-wrap {
@@ -139,7 +141,6 @@
   display: none;
 }
 
-/* KEY STYLE — bottom border only, no box */
 .auth-field__input {
   width: 100%;
   background: transparent;
@@ -213,7 +214,7 @@
 .auth-strength__bar.active-strong { background: var(--green); }
 
 .auth-strength__label {
-  font-family: sans-serif   ;
+  font-family: sans-serif;
   font-size: 8.5px;
   font-weight: 600;
   display: flex;
@@ -264,7 +265,7 @@
   margin: 16px 0 12px;
 }
 
-/* ─── Primary button — dark filled, like image ───── */
+/* ─── Primary button ─────────────────────────────── */
 .auth-btn-primary {
   width: 100%;
   background: var(--navy);
@@ -295,7 +296,7 @@
   transform: none;
 }
 
-/* ─── Ghost button — gold outline ────────────────── */
+/* ─── Ghost button ───────────────────────────────── */
 .auth-btn-ghost {
   width: 100%;
   background: transparent;
@@ -395,10 +396,51 @@
 }
 
 /* ─── Responsive ─────────────────────────────────── */
-@media (max-width: 420px) {
-  .auth-page          { align-items: flex-start;}
-  .auth-card__header  { padding: 10px 16px 8px; }
-  .auth-card__body    { padding: 12px 16px 16px; }
-  .auth-rules         { grid-template-columns: 1fr; }
-  
+
+/* Tablet & smaller desktop */
+@media (max-width: 768px) {
+  .auth-page {
+    padding: 24px 16px;
+    align-items: flex-start; /* card stacks from top, no overlap */
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 20px 12px 32px; /* top breathing room + bottom footer gap */
+    align-items: flex-start;
+  }
+
+  .auth-card {
+    max-width: 100%;        /* full width on very small screens */
+    border-radius: 8px;
+  }
+
+  .auth-card__header {
+    padding: 12px 20px 10px;
+  }
+
+  .auth-card__body {
+    padding: 12px 20px 18px;
+  }
+
+  .auth-rules {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Very small phones (320px) */
+@media (max-width: 360px) {
+  .auth-page {
+    padding: 16px 10px 28px;
+  }
+
+  .auth-card__header {
+    padding: 10px 16px 8px;
+  }
+
+  .auth-card__body {
+    padding: 10px 16px 16px;
+  }
 }

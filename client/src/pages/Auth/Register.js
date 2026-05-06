@@ -114,7 +114,7 @@ const Register = () => {
                                     <input
                                         type="email"
                                         className="auth-field__input"
-                                        placeholder="you@example.com"
+                                        placeholder="Enter your Email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         required
