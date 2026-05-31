@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 
 const { Option } = Select
 
-
 const CreateProduct = () => {
     const navigate = useNavigate();
     const [categories, setCategories] = useState([])
@@ -20,7 +19,6 @@ const CreateProduct = () => {
     const [quantity, setQuantity] = useState("")
     const [shipping, setShipping] = useState("")
 
-    //get all categories 
     const getAllCategory = async () => {
         try {
             const { data } = await axios.get('https://full-stack-ecommernce-app-backend.onrender.com/api/v1/category/get-category');
@@ -38,7 +36,6 @@ const CreateProduct = () => {
         getAllCategory();
     }, []);
 
-    //create product function
     const handleCreate = async (e) => {
         e.preventDefault();
         try {
@@ -54,9 +51,7 @@ const CreateProduct = () => {
 
             if (data?.success) {
                 toast.error(data?.message)
-
-            }
-            else {
+            } else {
                 toast.success('Product Created Successfully ')
                 navigate('/dashboard/admin/products')
             }
@@ -65,11 +60,9 @@ const CreateProduct = () => {
             console.log(error)
             toast.error('Something Went wrong ')
         }
-
     }
 
     return (
-
         <Layout title={"Dashboard- Create Product"}>
             <div className="container-fluid p-3">
                 <div className="row mx-3">
@@ -79,7 +72,18 @@ const CreateProduct = () => {
                     <div className="col-lg-6 col-md-8 ">
                         <h1 className='mb-4 mx-4 mx-lg-0 mt-4 mt-sm-0'>Create Product</h1>
                         <div className="w-100 ">
-                            <Select variant={false} placeholder="Select a Category" size="large" showSearch className='form-select mb-3' onChange={(value) => { setCategory(value) }} >
+                            {/* FIX: aria-label on Select (Ant Design doesn't support htmlFor) */}
+                            <label htmlFor="cp-category" className="visually-hidden">Select a category</label>
+                            <Select
+                                id="cp-category"
+                                variant={false}
+                                placeholder="Select a Category"
+                                size="large"
+                                showSearch
+                                className='form-select mb-3'
+                                onChange={(value) => { setCategory(value) }}
+                                aria-label="Select a category"
+                            >
                                 {categories?.map(c => (
                                     <Option key={c._id} value={c._id}>
                                         {c.name}
@@ -90,30 +94,71 @@ const CreateProduct = () => {
                         <div className="w-100 mb-3">
                             <label className='btn btn-outline-secondary'>
                                 {photo ? photo.name : "Upload Photo"}
+                                {/* FIX: hidden file input — label acts as its accessible name */}
                                 <input type="file" name="photo" accept='image/*' onChange={(e) => setPhoto(e.target.files[0])} hidden />
                             </label>
                         </div>
                         <div className="w-100 mb-3">
                             {photo && (
                                 <div className="text-center">
-                                    <img src={URL.createObjectURL(photo)} alt='product_photo' height={"200px"} className='img img-responsive' />
+                                    <img src={URL.createObjectURL(photo)} alt='product photo preview' height={"200px"} className='img img-responsive' />
                                 </div>
                             )}
                         </div>
+                        {/* FIX: added labels for all inputs */}
                         <div className="w-100 mb-3">
-                            <input type="text" value={name} placeholder='Write a name' className='form-control' onChange={(e) => setName(e.target.value)} />
+                            <label htmlFor="cp-name" className="visually-hidden">Product name</label>
+                            <input
+                                id="cp-name"
+                                type="text"
+                                value={name}
+                                placeholder='Write a name'
+                                className='form-control'
+                                onChange={(e) => setName(e.target.value)}
+                            />
                         </div>
                         <div className="w-100 mb-3">
-                            <textarea type="text" value={description} placeholder="Write a description" className="form-control" onChange={(e) => setDescription(e.target.value)} />
+                            <label htmlFor="cp-description" className="visually-hidden">Product description</label>
+                            <textarea
+                                id="cp-description"
+                                value={description}
+                                placeholder="Write a description"
+                                className="form-control"
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
                         </div>
                         <div className="w-100 mb-3">
-                            <input type="number" value={price} placeholder="Write a price" className="form-control" onChange={(e) => setPrice(e.target.value)} />
+                            <label htmlFor="cp-price" className="visually-hidden">Price</label>
+                            <input
+                                id="cp-price"
+                                type="number"
+                                value={price}
+                                placeholder="Write a price"
+                                className="form-control"
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
                         </div>
                         <div className="w-100 mb-3">
-                            <input type="number" value={quantity} placeholder="Write a quantity" className="form-control" onChange={(e) => setQuantity(e.target.value)} />
+                            <label htmlFor="cp-quantity" className="visually-hidden">Quantity</label>
+                            <input
+                                id="cp-quantity"
+                                type="number"
+                                value={quantity}
+                                placeholder="Write a quantity"
+                                className="form-control"
+                                onChange={(e) => setQuantity(e.target.value)}
+                            />
                         </div>
                         <div className="w-100 mb-3">
-                            <Select variant={false} placeholder="Select Shipping" size="large" showSearch className="form-select mb-3" onChange={(value) => { setShipping(value); }}>
+                            <Select
+                                variant={false}
+                                placeholder="Select Shipping"
+                                size="large"
+                                showSearch
+                                className="form-select mb-3"
+                                onChange={(value) => { setShipping(value); }}
+                                aria-label="Select shipping option"
+                            >
                                 <Option value="0">No</Option>
                                 <Option value="1">Yes</Option>
                             </Select>
@@ -125,7 +170,6 @@ const CreateProduct = () => {
                 </div>
             </div>
         </Layout>
-
     )
 }
 

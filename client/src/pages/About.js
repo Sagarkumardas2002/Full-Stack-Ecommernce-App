@@ -58,7 +58,7 @@ const About = () => {
 
                 {/* Text column */}
                 <div className="about-text-col">
-                    <h3>Who We Are</h3>
+                    <h2>Who We Are</h2>
                     <hr />
                     <p>
                         Your seamless shopping experience is our priority. With a keen eye

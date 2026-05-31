@@ -20,7 +20,6 @@ const UpdateProduct = () => {
     const [photo, setPhoto] = useState("");
     const [id, setId] = useState("");
 
-    //get single product
     const getSingleProduct = async () => {
         try {
             const { data } = await axios.get(
@@ -29,7 +28,6 @@ const UpdateProduct = () => {
             setName(data.product.name);
             setId(data.product._id);
             setDescription(data.product.description);
-            setPrice(data.product.price);
             setPrice(data.product.price);
             setQuantity(data.product.quantity);
             setShipping(data.product.shipping);
@@ -43,7 +41,6 @@ const UpdateProduct = () => {
         //eslint-disable-next-line
     }, []);
 
-    //get all category
     const getAllCategory = async () => {
         try {
             const { data } = await axios.get("https://full-stack-ecommernce-app-backend.onrender.com/api/v1/category/get-category");
@@ -60,7 +57,6 @@ const UpdateProduct = () => {
         getAllCategory();
     }, []);
 
-    //create product function
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
@@ -87,7 +83,6 @@ const UpdateProduct = () => {
         }
     };
 
-    //delete a product
     const handleDelete = async () => {
         try {
             let answer = window.prompt("Are You Sure want to delete this product ? ");
@@ -100,17 +95,12 @@ const UpdateProduct = () => {
         } catch (error) {
             console.log(error);
             toast.error("Something went wrong");
-            console.error("Error deleting product:", error.message);
         }
     };
 
-
-
     return (
-
-
         <Layout title={"Dashboard-Create Product"}>
-            <div className="container-fluid  p-3">
+            <div className="container-fluid p-3">
                 <div className="row">
                     <div className="col-lg-3 col-md-4 mx-sm-5 ">
                         <AdminMenu />
@@ -124,10 +114,9 @@ const UpdateProduct = () => {
                                 size="large"
                                 showSearch
                                 className="form-select mb-3"
-                                onChange={(value) => {
-                                    setCategory(value);
-                                }}
+                                onChange={(value) => { setCategory(value); }}
                                 value={category}
+                                aria-label="Select a category"
                             >
                                 {categories?.map((c) => (
                                     <Option key={c._id} value={c._id}>
@@ -136,6 +125,7 @@ const UpdateProduct = () => {
                                 ))}
                             </Select>
                             <div className="mb-3">
+                                {/* FIX: label wraps hidden file input — provides accessible name */}
                                 <label className="btn btn-outline-secondary col-12">
                                     {photo ? photo.name : "Upload Photo"}
                                     <input
@@ -150,15 +140,18 @@ const UpdateProduct = () => {
                             <div className="mb-3">
                                 <div className="text-center">
                                     <img
-                                        src={photo ? URL.createObjectURL(photo) : `https://ecom-final-fixed-backup.onrender.com/api/v1/product/product-photo/${id}`}
-                                        alt="product_photo"
+                                        src={photo ? URL.createObjectURL(photo) : `https://full-stack-ecommernce-app-backend.onrender.com/api/v1/product/product-photo/${id}`}
+                                        alt="product photo preview"
                                         height="200px"
                                         className="img img-responsive"
                                     />
                                 </div>
                             </div>
+                            {/* FIX: added labels for all inputs */}
                             <div className="mb-3">
+                                <label htmlFor="up-name" className="visually-hidden">Product name</label>
                                 <input
+                                    id="up-name"
                                     type="text"
                                     value={name}
                                     placeholder="Write a name"
@@ -167,8 +160,9 @@ const UpdateProduct = () => {
                                 />
                             </div>
                             <div className="mb-3">
+                                <label htmlFor="up-description" className="visually-hidden">Product description</label>
                                 <textarea
-                                    type="text"
+                                    id="up-description"
                                     value={description}
                                     placeholder="Write a description"
                                     className="form-control"
@@ -176,7 +170,9 @@ const UpdateProduct = () => {
                                 />
                             </div>
                             <div className="mb-3">
+                                <label htmlFor="up-price" className="visually-hidden">Price</label>
                                 <input
+                                    id="up-price"
                                     type="number"
                                     value={price}
                                     placeholder="Write a Price"
@@ -185,7 +181,9 @@ const UpdateProduct = () => {
                                 />
                             </div>
                             <div className="mb-3">
+                                <label htmlFor="up-quantity" className="visually-hidden">Quantity</label>
                                 <input
+                                    id="up-quantity"
                                     type="number"
                                     value={quantity}
                                     placeholder="Write a quantity"
@@ -200,10 +198,9 @@ const UpdateProduct = () => {
                                     size="large"
                                     showSearch
                                     className="form-select mb-3"
-                                    onChange={(value) => {
-                                        setShipping(value);
-                                    }}
+                                    onChange={(value) => { setShipping(value); }}
                                     value={shipping ? "yes" : "No"}
+                                    aria-label="Select shipping option"
                                 >
                                     <Option value="0">No</Option>
                                     <Option value="1">Yes</Option>
@@ -224,7 +221,6 @@ const UpdateProduct = () => {
                 </div>
             </div>
         </Layout>
-
     );
 };
 

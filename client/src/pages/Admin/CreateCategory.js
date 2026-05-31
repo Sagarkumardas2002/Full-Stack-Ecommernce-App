@@ -308,7 +308,7 @@ const CreateCategory = () => {
                             </div>
                             <div>
                                 <p className="cc-card-header__label">New Category</p>
-                                <h3 className="cc-card-header__title">Add Category</h3>
+                                <h2 className="cc-card-header__title">Add Category</h2>
                             </div>
                         </div>
                         <div className="cc-card__divider" />
@@ -340,7 +340,7 @@ const CreateCategory = () => {
                             </div>
                             <div>
                                 <p className="cc-card-header__label">All Categories</p>
-                                <h3 className="cc-card-header__title">Category List</h3>
+                                <h2 className="cc-card-header__title">Category List</h2>
                             </div>
                         </div>
                         <div className="cc-card__divider" />
@@ -443,7 +443,7 @@ const CreateCategory = () => {
                                     <path d="M9 6V4h6v2" />
                                 </svg>
                             </div>
-                            <h3 className="cc-confirm-box__title">Delete Category?</h3>
+                            <h2 className="cc-confirm-box__title">Delete Category?</h2>
                             <p className="cc-confirm-box__msg">
                                 Are you sure you want to delete{' '}
                                 <strong>"{deleteConfirm.name}"</strong>?{' '}
